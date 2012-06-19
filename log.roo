@@ -1,0 +1,42 @@
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-17 18:20:39
+project --topLevelPackage twitter.simplified.clone --projectName simple-TE-twitter --java 6 --packaging JAR
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-17 18:20:40
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-17 18:20:46
+hint
+jpa setup --database MYSQL --provider HIBERNATE 
+// [failed] entity jpa --class ~.domain.User --testAutomatically 
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-17 18:37:36
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-17 18:53:42
+entity jpa --class ~domain.User --permitReservedWords --testAutomatically
+hint
+field string --fieldName username --notNull --sizeMin 4 --sizeMax 16 --unique
+field string --fieldName emailAddress --notNull --unique --sizeMin 4 --sizeMax 254
+field string --fieldName fullName --notNull --sizeMin 4 --sizeMax 100 --comment "reasonable maxsize of 100 chars"
+entity jpa --class ~.domain.Tweet --testAutomatically
+hint
+hint finders
+finder list
+field string --fieldName content --sizeMax 140 --sizeMin 5 --notNull
+field date --fieldName creationDate --type java.util.Date
+field reference --fieldName ownerUser --type ~.domain.User --notNull
+hint
+hint field
+// [failed] */
+! 
+// [failed] entity jpa --class ~.domain.User
+field set --fieldName ownedTweets --type ~.domain.Tweet
+field set --fieldName followers --type ~.domain.User
+field set --fieldName followed --type ~.domain.User
+// [failed] test integration
+test integration --permitReservedWords 
+perform tests
+perform tests 
+perform tests
+perform tests
+perform tests 
+perform tests 
+perform package
+web mvc setup 
+web mvc all --package ~.web
+security setup
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-18 12:07:40

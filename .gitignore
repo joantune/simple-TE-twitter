@@ -1,10 +1,7 @@
 *.class
-
-# Package Files #
 *.jar
 *.war
 *.ear
 target
-log.roo
 .settings
 database.properties
