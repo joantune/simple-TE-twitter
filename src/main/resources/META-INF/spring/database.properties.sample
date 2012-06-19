@@ -1,0 +1,6 @@
+#Updated at Sun Jun 17 18:27:45 WEST 2012
+#Sun Jun 17 18:27:45 WEST 2012
+database.driverClassName=com.mysql.jdbc.Driver
+database.url=jdbc\:mysql\://localhost\:3306/tweeterClone
+database.username=tweeterDbUser
+database.password=tweeterDbPassword:)

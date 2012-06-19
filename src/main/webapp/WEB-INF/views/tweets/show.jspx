@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_twitter_simplified_clone_domain_Tweet" object="${tweet}" path="/tweets" z="ymiCjeoPuk4T00kSo0u3S1UFx1w=">
+        <field:display field="content" id="s_twitter_simplified_clone_domain_Tweet_content" object="${tweet}" z="a4yEDCAuEhCP351CSH3G55DjJXQ="/>
+        <field:display date="true" dateTimePattern="${tweet_creationdate_date_format}" field="creationDate" id="s_twitter_simplified_clone_domain_Tweet_creationDate" object="${tweet}" z="2Rbo0H1627lB2o3TYk6FHjvKy0Q="/>
+        <field:display field="ownerUser" id="s_twitter_simplified_clone_domain_Tweet_ownerUser" object="${tweet}" z="lFbhwcoCHlxU2PWo1/AL6Ya2Cww="/>
+    </page:show>
+</div>
