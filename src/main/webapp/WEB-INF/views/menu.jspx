@@ -16,5 +16,9 @@
             <menu:item id="i_tweet_new" messageCode="global_menu_new" url="/tweets?form" z="/qclo5f8GRKqem2DenBFyfKEP9U="/>
             <menu:item id="i_tweet_list" messageCode="global_menu_list" url="/tweets?page=1&amp;size=${empty param.size ? 10 : param.size}" z="g3gl6jswkaRLXe5+eBWJ/BRN2FA="/>
         </menu:category>
+        <menu:category id="c_home">
+            <menu:item id="i_home" messageCode="global_menu_home" url="/home/index"/>
+            <menu:item id="i_home" messageCode="global_menu_home_secure" url="/home/secured/home"/>
+        </menu:category> 
     </menu:menu>
 </div>

@@ -9,5 +9,6 @@
         <field:display field="ownedTweets" id="s_twitter_simplified_clone_domain_User_ownedTweets" object="${user}" z="P7R9XPMMBc0fLCqwO0goPBFC9Kw="/>
         <field:display field="followers" id="s_twitter_simplified_clone_domain_User_followers" object="${user}" z="zDfAL6Ih1zDMALnCLRejJXTjGYY="/>
         <field:display field="followed" id="s_twitter_simplified_clone_domain_User_followed" object="${user}" z="LZH79e1Sysb2vKnwGXlB403AZvw="/>
+        <field:display field="password" id="s_twitter_simplified_clone_domain_User_password" object="${user}" z="662jQS2G7FwqEOQeSn/pYl4dU/c="/>
     </page:show>
 </div>

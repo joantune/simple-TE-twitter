@@ -5,3 +5,4 @@
 target
 .settings
 database.properties
+.DS_Store

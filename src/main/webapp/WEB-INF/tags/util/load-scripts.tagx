@@ -8,9 +8,37 @@
   <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
   <spring:url value="/resources/spring/Spring.js" var="spring_url" />
   <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
+  
+  <!--  Video -->
+  <spring:url value="/resources/js/video.js" var="video_js_url" scope="request" />
+  
+  <!-- Less -->
+  <spring:url value="/resources/js/less-1.3.0.min.js" var="less_js_url"  scope="request"/> 
+  
+  <!-- Bootstrap -->
+  <spring:url value="/resources/js/bootstrap-alert.js" var="bootstrap-alert_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-button.js" var="bootstrap-button_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-carousel.js" var="bootstrap-carousel_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-collapse.js" var="bootstrap-collapse_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-dropdown.js" var="bootstrap-dropdown_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-modal.js" var="bootstrap-modal_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-popover.js" var="bootstrap-popover_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-scrollspy.js" var="bootstrap-scrollspy_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-tab.js" var="bootstrap-tab_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-tooltip.js" var="bootstrap-tooltip_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-transition.js" var="bootstrap-transition_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/bootstrap-typeahed.js" var="bootstrap-typeahead_js_url"  scope="request"/> 
+  
+  <spring:url value="/resources/js/bootstrap.js" var="bootstrap_js_url"  scope="request"/> 
+  
+  
+  <!--  Jquery -->
+  <spring:url value="/resources/js/jquery-1.7.2.js" var="jquery_js_url"  scope="request"/> 
+  
+  
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <link rel="stylesheet" type="text/css" href="${tundra_url}" />
-  <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
+ <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
@@ -24,6 +52,9 @@
   <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+  
+  
+  
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
-
+ 
 </jsp:root>

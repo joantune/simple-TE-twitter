@@ -41,7 +41,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<User, String> ApplicationConversionServiceFactoryBean.getUserToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<twitter.simplified.clone.domain.User, java.lang.String>() {
             public String convert(User user) {
-                return new StringBuilder().append(user.getUsername()).append(" ").append(user.getEmailAddress()).append(" ").append(user.getFullName()).toString();
+                return new StringBuilder().append(user.getUsername()).append(" ").append(user.getEmailAddress()).append(" ").append(user.getFullName()).append(" ").append(user.getPassword()).toString();
             }
         };
     }

@@ -9,6 +9,7 @@
         <field:select field="ownedTweets" id="c_twitter_simplified_clone_domain_User_ownedTweets" itemValue="id" items="${tweets}" multiple="true" path="/tweets" z="Pvt02/Tff74eUVWxiUs63GdXN9U="/>
         <field:select field="followers" id="c_twitter_simplified_clone_domain_User_followers" itemValue="id" items="${users}" multiple="true" path="/users" z="pnAgqE/YvDFwFHDwkkP0u/M+Q3M="/>
         <field:select field="followed" id="c_twitter_simplified_clone_domain_User_followed" itemValue="id" items="${users}" multiple="true" path="/users" z="unU1w99ANWd/T5ogtz4RoBM2QA4="/>
+        <field:textarea field="password" id="c_twitter_simplified_clone_domain_User_password" required="true" z="+aj/9tnRUV79SWInrXe5F1IcbK0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_twitter_simplified_clone_domain_User" render="${not empty dependencies}" z="zzDSl2quoyt6dhrFb+AsterEF7c="/>
 </div>

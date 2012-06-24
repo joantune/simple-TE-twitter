@@ -26,6 +26,7 @@ privileged aspect UserDataOnDemand_Roo_DataOnDemand {
         User obj = new User();
         setEmailAddress(obj, index);
         setFullName(obj, index);
+        setPassword(obj, index);
         setUsername(obj, index);
         return obj;
     }
@@ -44,6 +45,14 @@ privileged aspect UserDataOnDemand_Roo_DataOnDemand {
             fullName = fullName.substring(0, 100);
         }
         obj.setFullName(fullName);
+    }
+    
+    public void UserDataOnDemand.setPassword(User obj, int index) {
+        String password = "passwordxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_" + index;
+        if (password.length() > 64) {
+            password = password.substring(0, 64);
+        }
+        obj.setPassword(password);
     }
     
     public void UserDataOnDemand.setUsername(User obj, int index) {
