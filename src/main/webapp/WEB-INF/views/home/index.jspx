@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<jsp:directive.page import="org.springframework.web.util.HtmlUtils"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <div class="navbar-inner">
@@ -18,6 +19,23 @@
   		 	margin-right: auto;
     	 }
   </style>
+  
+  <!--  Please login conditional info -->
+  <c:if test="${not empty param.pleaseLogin}">
+	  <div class="navbar-fixed-bottom container-fluid">
+		<div id="registerFirst" class="alert alert-info">
+			<button class="close" data-dismiss="alert">×</button>
+			  <!--  let's retrieve the full name, if it exists -->
+			  <c:if test="${not empty param.fullName}">
+				<h3 style="font-weight: normal; text-align: center;"><strong> ${fn:escapeXml(param.fullName)}</strong>, please login before proceeding</h3>
+			  </c:if>
+			  <c:if test="${empty param.fullName}">
+				<h3 style="font-weight: normal; text-align: center;"><strong>Please</strong> login or register before proceeding</h3>
+			  </c:if>
+	  	</div>
+	  </div>
+  </c:if>
+ 
  	<div class="container">
  		<div class="hero-unit">
 					<video id="example_video_1" class="centered video-js vjs-default-skin" controls="" preload="Auto" width="640" height="264"
@@ -33,30 +51,71 @@
 	 			<div class="span5 well-transparent" style="padding-top: 0px;">
 	 				<h2>New user</h2>
 	 				<p>Register here</p>
-	 				<form  class="form-horizontal">
-						<input type="text" class="span5" placeholder="Full Name"/> 					
-						<input type="text"  class="span5" placeholder="Email"/> 					
-						<input type="text" class="input-small span2" placeholder="Username"/> 					
-						<input type="password" class="input-small span2 offset1" placeholder="Password"/> 					
-							<button type="submit" class="btn">Register!</button>
-	 				</form>
+			  		
+			  		<c:if test="${not empty param.registerErrors}">
+			  			<c:set var="registerErrorsDisplay" value="" />
+			  		</c:if>
+			  		<c:if test="${empty param.registerErrors}">
+			  			<c:set var="registerErrorsDisplay" value="display: none;" />
+			  		</c:if>
+	 				
+	 				<div class="alert alert-error fade-in" id="registerErrorDiv"
+							style="${registerErrorsDisplay}">
+							<h4 class="alert-heading">Register error!</h4>
+					</div>
+					
+					<form:errors  path="username"/>
+					<form:errors  path="password"/>
+					<form:errors  path="emailAddress"/>
+					<form:errors  path="randomSalt"/>
+					<form:errors  path="fullName"/>
+	 				
+    				<spring:url value="/users" var="register_form_url" />
+	 				<form id="user" class="form-horizontal" method="POST" action="${fn:escapeXml(register_form_url)}">
+							<div class="control-group">
+								<input placeholder="Full Name" name="fullName" class="row-fluid req-string" type="text"/>
+								<input placeholder="Email" name="emailAddress" class="row-fluid req-email" type="text"/>
+								<input placeholder="Username" name="username" class="input req-min row-fluid" minlength="4" maxlength="16" type="text"/>
+								<input	placeholder="Password" name="tempPasswordContainer" class="input req-same row-fluid span3" rel="password" type="password"/>
+								<div class="row-fluid">
+									<input	placeholder="Repeat password" name="password_repeated" class=" input req-same" rel="password" type="password"/>
+									<button id="registerButton" class="btn pull-right" type="submit">Register!</button>
+								</div>
+							</div>
+					</form>
 	 			</div>
+	 			
+	 			<c:if test="${not empty param.login_error}">
+			  			<c:set var="loginErrorsDisplay" value="" />
+			  		</c:if>
+			  		<c:if test="${empty param.login_error}">
+			  			<c:set var="loginErrorsDisplay" value="display: none;" />
+			  	</c:if>
 	 			<div class="span5 well-transparent" style="padding-top: 0px;">
 	 				<h2>Login</h2>
 	 				<p>Login here</p>
-	 				<form  class="form-inline">
-						<input type="text" class="span2 input-small" placeholder="Username"/> 					
-						<input type="password"  class="span2 input-small" placeholder="Password"/> 					
-						<button type="submit" class="btn btn-primary">Login!</button>
+					
+					<!--  Error div -->	 				
+	 				<div id="loginErrorDiv" class="alert alert-error fade-in" style="${loginErrorsDisplay}">
+	 					<h4 class="alert-heading">Login error!</h4>
+	 					<c:if test="${not empty param.login_error}">
+	 					  <div id="afterSubmitError">
+	 					  	<p class="alert-error">Wrong credentials</p>
+					        <!-- let us not show the default error message - it has a security problem (shows when a user exists vs when a users password is wrong)
+					           <spring:message code="security_login_unsuccessful" />
+					          <p><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /></p> -->
+				          </div>
+	 					</c:if>
+	 				</div>
+	 				
+    				<spring:url value="/resources/j_spring_security_check" var="form_url" />
+	 				<form id="loginForm" name="f" class="form-inline" method="post" action="${fn:escapeXml(form_url)}" >
+						<div class="control-group">
+							<input id="j_username" name="j_username" type="text" class="req-string span2 input-small" placeholder="Username"/> 					
+							<input id="j_password" name="j_password" type="password"  class="req-string span2 input-small" placeholder="Password"/> 					
+							<button id="loginButton" type="submit" class="btn btn-primary">Login!</button>
+						</div>
 	 				</form>
-    			<c:if test="${not empty param.login_error}">
-      				<div class="errors">
-				        <p>
-				          <spring:message code="security_login_unsuccessful" />
-				          <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
-				        </p>
-			      </div>
-			    </c:if>
 	 				<p>&#xA0;&#xA0;</p>
 	    			<p>&#xA0;&#xA0;</p>
 	 			</div>
@@ -75,6 +134,67 @@
 <script src="${less_js_url}" type="text/javascript" ><!-- bug correcter --></script>
 <script src="${video_js_url}" type="text/javascript" ><!-- damn --></script>
 <script src="${bootstrap_js_url}" type="text/javascript" ><!-- damn --></script> 
+<script src="${jquery_uf_validator_js_url}" type="text/javascript" ><!-- damn --></script> 
+
+<script type="text/javascript">
+		// EXECUTE PLUGIN ON DOM READY - START
+		$(function () {
+			
+			$('#loginButton').formValidator({
+				/*
+				onSuccess	: function() { 
+					console.log('Success!'); 
+					$('#loginForm .control-group').removeClass('error')
+				},
+				*/
+				scope		: '#loginForm',
+				errorDiv	: '#loginErrorDiv',
+				onError		: function () { 
+								$('#afterSubmitError').hide();
+								//let's make the inputs have an error class
+								$('#loginForm .control-group').addClass('error')
+					},
+				errorMsg	: {
+							reqString	: 'You need to fill out both fields'
+							}
+			
+			});
+					// by default let's hide the login error div, unless we have an afterSubmitError
+			/* 	if (!$('#afterSubmitError').is())
+					{
+					$('#loginErrorDiv').hide();
+					} */
+					
+				$('#registerButton').formValidator({
+					/*
+					onSuccess	: function() { 
+						console.log('Success!'); 
+						$('#loginForm .control-group').removeClass('error')
+					},
+					*/
+					scope		: '#user',
+				/* 	onSuccess	: function () {
+						console.log("Register Success!!!");
+					}, */
+					onError		: function() {
+						$('#user .control-group').addClass('error');
+					},
+					errorDiv	: '#registerErrorDiv',
+					errorMsg	: {
+								reqString	: '<br/>You need to fill out all fields',
+								reqMailNotValid: '<br/>Please insert a valid email address',
+								reqMailEmpty: '<br/>You must insert an email address',
+								reqSame: '<br/>The password must be the same',
+								reqMin: '<br/>The username must be at least %1 characters long'
+								},
+					customErrMsg	: '<strong>Register form errors:</strong>'
+				
+				});
+			
+		});
+		// EXECUTE PLUGIN ON DOM READY - END
+	</script>
+
 </div>
 
 

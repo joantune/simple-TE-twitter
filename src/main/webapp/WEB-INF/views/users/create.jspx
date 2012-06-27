@@ -6,10 +6,15 @@
         <field:input field="username" id="c_twitter_simplified_clone_domain_User_username" max="16" min="4" required="true" z="hxb7aHFT1wbCQvNdpn5jmE/BG4U="/>
         <field:textarea field="emailAddress" id="c_twitter_simplified_clone_domain_User_emailAddress" required="true" validationMessageCode="field_invalid_email" z="3WmoxXSELaBCSM7DAgqNM7iOCgc="/>
         <field:textarea field="fullName" id="c_twitter_simplified_clone_domain_User_fullName" required="true" z="lD8f7c63eFBIQgmp2vDjk5jfaoo="/>
-        <field:select field="ownedTweets" id="c_twitter_simplified_clone_domain_User_ownedTweets" itemValue="id" items="${tweets}" multiple="true" path="/tweets" z="Pvt02/Tff74eUVWxiUs63GdXN9U="/>
+        <!--  <field:select field="ownedTweets" id="c_twitter_simplified_clone_domain_User_ownedTweets" itemValue="id" items="${tweets}" multiple="true" path="/tweets" z="Pvt02/Tff74eUVWxiUs63GdXN9U="/>
         <field:select field="followers" id="c_twitter_simplified_clone_domain_User_followers" itemValue="id" items="${users}" multiple="true" path="/users" z="pnAgqE/YvDFwFHDwkkP0u/M+Q3M="/>
-        <field:select field="followed" id="c_twitter_simplified_clone_domain_User_followed" itemValue="id" items="${users}" multiple="true" path="/users" z="unU1w99ANWd/T5ogtz4RoBM2QA4="/>
-        <field:textarea field="password" id="c_twitter_simplified_clone_domain_User_password" required="true" z="+aj/9tnRUV79SWInrXe5F1IcbK0="/>
+        <field:select field="followed" id="c_twitter_simplified_clone_domain_User_followed" itemValue="id" items="${users}" multiple="true" path="/users" z="unU1w99ANWd/T5ogtz4RoBM2QA4="/> -->
+        <field:textarea field="password" id="c_twitter_simplified_clone_domain_User_password" render="false" z="user-managed"/>
+        <field:input decimalMax="32" decimalMin="6" field="tempPasswordContainer" id="c_twitter_simplified_clone_domain_User_tempPasswordContainer" max="32" min="6" required="true" type="password"/>
+        <field:select field="ownedTweets" id="c_twitter_simplified_clone_domain_User_ownedTweets" itemValue="id" items="${tweets}" multiple="true" path="/tweets" render="false" z="user-managed"/>
+        <field:select field="followers" id="c_twitter_simplified_clone_domain_User_followers" itemValue="id" items="${users}" multiple="true" path="/users" render="false" z="user-managed"/>
+        <field:select field="followed" id="c_twitter_simplified_clone_domain_User_followed" itemValue="id" items="${users}" multiple="true" path="/users" render="false" z="user-managed"/>
+        <field:textarea field="randomSalt" id="c_twitter_simplified_clone_domain_User_randomSalt" render="false" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_twitter_simplified_clone_domain_User" render="${not empty dependencies}" z="zzDSl2quoyt6dhrFb+AsterEF7c="/>
 </div>

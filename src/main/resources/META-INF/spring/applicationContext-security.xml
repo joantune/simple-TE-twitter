@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <!-- HTTP security configurations -->
     <http auto-config="true" use-expressions="true">
-        <form-login login-processing-url="/resources/j_spring_security_check" login-page="/home/index" authentication-failure-url="/home/index?login_error=t" />
+        <form-login login-processing-url="/resources/j_spring_security_check" login-page="/home/index?pleaseLogin=t" authentication-failure-url="/home/index?login_error=t" default-target-url="/home/secured/home" />
         <logout logout-url="/resources/j_spring_security_logout" />
         <!-- Configure these elements to secure URIs in your application -->
         <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" />
@@ -25,8 +25,9 @@
                 <!-- <user name="user" password="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" authorities="ROLE_USER" /> -->
             </user-service>
         </authentication-provider>
-        
+        <authentication-provider ref="daoAuthenticationProvider"/>
     </authentication-manager>
+    
     <beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
      	<beans:constructor-arg value="256"/>
  	</beans:bean>

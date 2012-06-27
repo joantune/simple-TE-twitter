@@ -65,4 +65,12 @@ privileged aspect User_Roo_JavaBean {
         this.password = password;
     }
     
+    public String User.getRandomSalt() {
+        return this.randomSalt;
+    }
+    
+    public void User.setRandomSalt(String randomSalt) {
+        this.randomSalt = randomSalt;
+    }
+    
 }

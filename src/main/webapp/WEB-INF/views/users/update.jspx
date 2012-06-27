@@ -10,5 +10,6 @@
         <field:select field="followers" id="c_twitter_simplified_clone_domain_User_followers" itemValue="id" items="${users}" multiple="true" path="/users" z="pnAgqE/YvDFwFHDwkkP0u/M+Q3M="/>
         <field:select field="followed" id="c_twitter_simplified_clone_domain_User_followed" itemValue="id" items="${users}" multiple="true" path="/users" z="unU1w99ANWd/T5ogtz4RoBM2QA4="/>
         <field:textarea field="password" id="c_twitter_simplified_clone_domain_User_password" required="true" z="+aj/9tnRUV79SWInrXe5F1IcbK0="/>
+        <field:input field="randomSalt" id="c_twitter_simplified_clone_domain_User_randomSalt" max="9" min="9" required="true" z="xHu5C5G/NxJPyV5uhB49vXJkjQ4="/>
     </form:update>
 </div>

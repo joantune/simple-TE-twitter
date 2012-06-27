@@ -27,6 +27,7 @@ privileged aspect UserDataOnDemand_Roo_DataOnDemand {
         setEmailAddress(obj, index);
         setFullName(obj, index);
         setPassword(obj, index);
+        setRandomSalt(obj, index);
         setUsername(obj, index);
         return obj;
     }
@@ -53,6 +54,14 @@ privileged aspect UserDataOnDemand_Roo_DataOnDemand {
             password = password.substring(0, 64);
         }
         obj.setPassword(password);
+    }
+    
+    public void UserDataOnDemand.setRandomSalt(User obj, int index) {
+        String randomSalt = "randomS_" + index;
+        if (randomSalt.length() > 9) {
+            randomSalt = randomSalt.substring(0, 9);
+        }
+        obj.setRandomSalt(randomSalt);
     }
     
     public void UserDataOnDemand.setUsername(User obj, int index) {

@@ -60,3 +60,6 @@ quit
 finder list --class ~.domain.User --depth 1 --filter username,equal
 finder add --finderName findUsersByUsernameEquals --class ~.domain.User
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-24 05:33:52
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-24 19:11:40
+field string --class ~.domain.User --fieldName randomSalt --sizeMax 32 --sizeMin 32 --notNull
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-25 02:58:14

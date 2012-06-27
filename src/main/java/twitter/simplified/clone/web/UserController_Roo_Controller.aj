@@ -4,6 +4,8 @@
 package twitter.simplified.clone.web;
 
 import java.io.UnsupportedEncodingException;
+
+import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 import twitter.simplified.clone.domain.Tweet;
@@ -24,11 +27,22 @@ privileged aspect UserController_Roo_Controller {
     public String UserController.create(@Valid User user, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, user);
-            return "users/create";
+            return "redirect:/home/index?registerErrors=t";
         }
         uiModel.asMap().clear();
+        try {
         user.persist();
-        return "redirect:/users/" + encodeUrlPathSegment(user.getId().toString(), httpServletRequest);
+        }
+        catch (PersistenceException ex)
+        {
+            return "redirect:/home/index?registerErrors=t";
+        }
+        try {
+			return "redirect:/home/index?pleaseLogin=t&fullName="+ UriUtils.encodePathSegment(user.getFullName(), WebUtils.DEFAULT_CHARACTER_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+        return "redirect:/home/index?pleaseLogin=t";
     }
     
     @RequestMapping(params = "form", produces = "text/html")

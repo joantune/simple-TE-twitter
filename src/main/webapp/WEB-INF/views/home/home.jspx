@@ -1,9 +1,286 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+<jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    
-    <h1>Request: </h1>
+    <div class="navbar navbar-fixed-top">
+     <div class="navbar-inner">
+					<div class="container-fluid">
+						<span class="brand">Simple Twitter</span>
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="#">Home</a>
+								</li>
+							</ul>
+						</div>
+
+						<ul class="nav pull-right">
+							<li>
+								<!--  Search --> <!-- TODO action and typeahead/ajax maybe ? -->
+								<form class="navbar-search form-inline" action="">
+									<input type="text" class="search-query span2"
+										placeholder="Search users" /> 
+								</form>
+							</li>
+							<li class="divider-vertical"></li>
+							<li>
+								 <spring:url value="/resources/j_spring_security_logout" var="logout"/>
+								<a href="${logout}"><spring:message code="security_logout"/></a>
+							</li>
+							<!--  here maybe a user profile/etc
+							<li class="dropdown">
+				              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+				              <ul class="dropdown-menu">
+				                <li><a href="#">Action</a></li>
+				                <li><a href="#">Another action</a></li>
+				                <li><a href="#">Something else here</a></li>
+				                <li class="divider"></li>
+				                <li><a href="#">Separated link</a></li>
+				              </ul>
+				            </li> -->
+						</ul>
+					</div>
+	 </div>
+    </div>
+
+<style type="text/css">
+   /* Special grid styles
+-------------------------------------------------- */
+.show-grid {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.show-grid [class*="span"] {
+  background-color: #eee;
+  text-align: center;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  min-height: 30px;
+  line-height: 30px;
+}
+.show-grid:hover [class*="span"] {
+  background: #ddd;
+}
+.show-grid .show-grid {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.show-grid .show-grid [class*="span"] {
+  background-color: #ccc;
+}
+
+.size32 {
+	width: 32px;
+	height: 32px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.size16 {
+	width: 16px;
+	height: 16px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+  body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      } 
+
+.sizeFriendList {
+	width: 24px;
+	height: 24px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.well-small {
+	padding: 9px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.well-small-opaque {
+	padding: 9px;
+	background-color: #f5f5f5;
+	border: 1px solid #eee;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	/* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+.well-nopadding-opaque {
+	background-color: #f5f5f5;
+	border: 1px solid #eee;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	/* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+.anti-well-nopadding-opaque {
+  background-color: white;
+  border: 1px solid #333333;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+   /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+div .friend {
+	height: 25px;
+	width: 100%;
+	overflow: hidden;
+	display: block;
+	text-overflow: ellipsis;
+}
+
+div .friend h5 {
+	margin-left: 5%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+div .friend em {
+	display: block;
+	margin-left: 5%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.avatar {
+	width: 48px;
+	height: 48px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+</style>
+
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" />
+	<spring:url value="/resources/images/defaultUserLogo.png" var="defaultUserLogoUrl"/>
+	
+	<div class="container-fluid">
+      <div class="row nav">
+   	   <div class="offset1 span3 columns">
+          <div class="well-small-opaque row">
+          	<div>
+	          <img class="size32 span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+	          <h4 class="span2">--</h4>
+	          <em class="span2">--</em>
+	         </div>
+          </div><!--/.well row -->
+          <div class="row">
+			  <p class="nav-header">Statistics</p>
+			  <table class="table table-bordered table-striped table-condensed">
+			  	<thead>
+			  		<!-- <tr>
+			  			<th>Statistics</th>
+			  		</tr> -->
+			  		<tr>
+			  			<th>Tweets</th>
+			  			<th>Following</th>
+			  			<th>Followers</th>
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+			  		<tr>
+				  		<!-- <td>${user.numberOwnTweets}</td>
+				  		<td>${user.numberFollowed}</td>
+				  		<td>${user.numberFollowers}</td> -->
+				  		<td>123</td>
+				  		<td>2332</td>
+				  		<td>1222</td>
+				  	</tr>
+			  	</tbody>
+			  </table>
+			  <p>&#xA0;&#xA0;&#xA0;&#xA0;</p>
+	      </div>
+        </div><!--/span-->
+        
+        <!-- 
+        <div class="span8">
+        	<div class="well">
+        		<form class="form-inline">
+        			<textarea placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140" cols="2" rows="3"/>
+        			<button class="btn-primary btn-large">Tweet</button>
+        		</form>
+        	</div>
+          <div class="well">
+          	<h1>Tweets</h1>
+       		<hr/>
+          	<div>
+          	
+          		<div class="anti-well-nopadding-opaque border-box well-small columns" >
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+			  		<div style="display: block;">
+						<img class="avatar span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+						<div style="margin-left: 90px; display: block;">
+							 <h5 style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger expected expected bigger expected expectedbigger expected expectedbigger expected expected than expected expected</h5>
+							 <em style="display: block; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+						</div>
+					</div>
+					
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+			  		</div>
+					 </blockquote>
+				 </div>
+				 
+				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
+			  		<div style="display: block;">
+						<img class="avatar span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+						 <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+						 <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					</div>
+					
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+					 </blockquote>
+			  		</div>
+				 </div>
+				 
+          	
+          	</div>
+          </div>
+        </div> -->
+        
+      </div><!--/row-->
+
+      <hr/>
+
+      <footer>
+        <p>© João Antunes 2012</p> <a href="#"><p class="pull-right">Feedback</p></a>
+      </footer>
+
+    </div><!--/.fluid-container-->
+<!--  Loading JS in the end so that pages load faster-->
+<script src="${jquery_js_url}" type="text/javascript" ><!-- bug correcter --></script>
+<script src="${less_js_url}" type="text/javascript" ><!-- bug correcter --></script>
+<script src="${bootstrap_js_url}" type="text/javascript" ><!-- damn --></script> 
+<script src="${jquery_uf_validator_js_url}" type="text/javascript" ><!-- damn --></script> 
+
 </div>
 
 

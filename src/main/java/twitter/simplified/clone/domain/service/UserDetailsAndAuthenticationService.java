@@ -28,26 +28,31 @@ public class UserDetailsAndAuthenticationService implements UserDetailsService {
 	
 	public class OwnUserDetailImplementation extends org.springframework.security.core.userdetails.User {
 		
-		private Long id;
 		
-		public OwnUserDetailImplementation(Long id, String username, String password,
+		private final User user;
+		
+		public OwnUserDetailImplementation(User user, String username, String password,
 				Collection<? extends GrantedAuthority> authorities) {
-			this(id, username, password, true, true, true,
+			this(user, username, password, true, true, true,
 					true, authorities);
 		}
-		public OwnUserDetailImplementation(Long id, String username, String password,
+		public OwnUserDetailImplementation(User user, String username, String password,
 				boolean enabled, boolean accountNonExpired,
 				boolean credentialsNonExpired, boolean accountNonLocked,
 				Collection<? extends GrantedAuthority> authorities) {
 			super(username, password, enabled, accountNonExpired, credentialsNonExpired,
 					accountNonLocked, authorities);
-			Assert.notNull(id, "id of the user must not be null");
-			this.id=id;
+			Assert.notNull(user, "user must not be null");
+			this.user = user;
 		}
 		
-		public Long getSalt()
+		public String getSalt()
 		{
-			return id;
+			return user.getRandomSalt();
+		}
+
+		public User getUser() {
+			return user;
 		}
 
 		/**
@@ -76,7 +81,7 @@ public class UserDetailsAndAuthenticationService implements UserDetailsService {
 			throw new DataAccessException("error retrieving a User") {
 			};
 
-		OwnUserDetailImplementation user = new OwnUserDetailImplementation(singleResult.getId(),
+		OwnUserDetailImplementation user = new OwnUserDetailImplementation(singleResult,
 				username, singleResult.getPassword(),
 				Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
 		return user;

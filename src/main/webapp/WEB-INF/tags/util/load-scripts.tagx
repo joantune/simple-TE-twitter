@@ -2,12 +2,14 @@
 
   <jsp:output omit-xml-declaration="yes" />
 
+<!--
   <spring:theme code="styleSheet" var="roo_css" />
   <spring:url value="/${roo_css}" var="roo_css_url" />
+  -->
   <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
-  <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
+  <!-- <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" /> -->
   <spring:url value="/resources/spring/Spring.js" var="spring_url" />
-  <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
+  <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" /> 
   
   <!--  Video -->
   <spring:url value="/resources/js/video.js" var="video_js_url" scope="request" />
@@ -35,10 +37,18 @@
   <!--  Jquery -->
   <spring:url value="/resources/js/jquery-1.7.2.js" var="jquery_js_url"  scope="request"/> 
   
+  <!--  UF Form validator -->
+  <spring:url value="/resources/js/jquery.ufvalidator-1.0.7.js" var="jquery_uf_validator_js_url"  scope="request"/> 
+  
   
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
+  <!-- 
   <link rel="stylesheet" type="text/css" href="${tundra_url}" />
  <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
+  -->
+  
+ <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
+ 
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->

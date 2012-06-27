@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)http://twitter.github.com/bootstrap/examples/fluid.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ 
+    <!-- Le styles -->
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      } 
+      
+      /* Special grid styles
+-------------------------------------------------- */
+.show-grid {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.show-grid [class*="span"] {
+  background-color: #eee;
+  text-align: center;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  min-height: 30px;
+  line-height: 30px;
+}
+.show-grid:hover [class*="span"] {
+  background: #ddd;
+}
+.show-grid .show-grid {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.show-grid .show-grid [class*="span"] {
+  background-color: #ccc;
+}
+      
+    </style>
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+     <div class="navbar-inner">
+					<div class="container-fluid">
+						<span class="brand">Simple Twitter</span>
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li class="active">
+									<!--  TODO link to the index, TODO? localize --> <a href="#">Home</a>
+								</li>
+							</ul>
+						</div>
+
+						<ul class="nav pull-right">
+							<li>
+								<!--  Search --> <!-- TODO action and typeahead/ajax maybe ? -->
+								<!-- TODO ? localize ? -->
+								<form class="navbar-search form-inline" action="">
+									<input type="text" class="search-query span2"
+										placeholder="Search users" /> <i
+										class="icon-search icon-white"></i>
+								</form>
+							</li>
+							<li class="divider-vertical"></li>
+							<li>
+								<!-- TODO make the logout work --> <!-- TODO ? localize ?--> <!-- TODO not sure about the icon.. too white-->
+								<a href="#">Logout <!-- <i class="icon-white icon-off"></i> --></a>
+							</li>
+							<!--  here maybe a user profile/etc
+							<li class="dropdown">
+				              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+				              <ul class="dropdown-menu">
+				                <li><a href="#">Action</a></li>
+				                <li><a href="#">Another action</a></li>
+				                <li><a href="#">Something else here</a></li>
+				                <li class="divider"></li>
+				                <li><a href="#">Separated link</a></li>
+				              </ul>
+				            </li> -->
+						</ul>
+					</div>
+				</div>
+    </div>
+	<style type="text/css">
+	.size32 {
+		width: 32px;
+		height: 32px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+	
+	.size16 {
+		width: 16px;
+		height: 16px;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+	.sizeFriendList {
+		width: 24px;
+		height: 24px;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+	
+	.well-small {
+	  padding: 9px;
+	  -webkit-border-radius: 3px;
+	  -moz-border-radius: 3px;
+	  border-radius: 3px;
+	}
+	
+	.well-small-opaque {
+  padding: 9px;
+  background-color: #f5f5f5;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+   /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+.well-nopadding-opaque {
+  background-color: #f5f5f5;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+   /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+.anti-well-nopadding-opaque {
+  background-color: white;
+  border: 1px solid #333333;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+   /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+div .friend {
+height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;
+
+}
+
+div .friend h5 {
+	margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;
+}
+div .friend em {
+	display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;
+}
+
+.avatar{
+	width:48px;
+	height:48px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+}
+	
+	</style>
+	<div class="container-fluid">
+      <div class="row nav">
+   	   <div class="offset1 span3 columns">
+          <div class="well-small-opaque row">
+          	<div>
+	          <img class="size32 span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+	          <h4 class="span2">Full name bigger but no biggy really</h4>
+	          <em class="span2">username</em>
+	         </div>
+          </div><!--/.well row -->
+          <div class="row">
+			  <p>&nbsp;&nbsp;</p>
+			  <p class="nav-header">Statistics</p>
+			  <table class="table table-bordered table-striped table-condensed">
+			  	<thead>
+			  		<!-- <tr>
+			  			<th>Statistics</th>
+			  		</tr> -->
+			  		<tr>
+			  			<th>Tweets</th>
+			  			<th>Following</th>
+			  			<th>Followers</th>
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+			  		<tr>
+				  		<td>23</td>
+				  		<td>100</td>
+				  		<td>10000</td>
+				  	</tr>
+			  	</tbody>
+			  </table>
+			  <p>&nbsp;&nbsp;</p>
+	          	<div class="well-nopadding-opaque">
+					<p class="nav-header" >Friends list</p>	          	
+					<hr>
+						<div style="display: block; overflow: auto; height: 200px;">
+				          	<div class="border-box well-small columns" style="height: 20px; overflow: auto; display: block; text-overflow: ellipsis;">
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h4 style="display: inline-block; margin-left: 5%;">Full name bigger than expected</h4>
+					          <em>(username)</em>
+					         </div>
+					         	<div class="border-box well-small columns" style="height: 25px; overflow: hidden;  display: block; text-overflow: ellipsis;">
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="display: inline-block; margin-left: 5%;">Full expected</h5>
+					          <em style="margin-left: 5%;">(username)</em>
+					         </div>
+					         	<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+					          <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					         	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+						</div>
+	          	</div>
+	      </div>
+        </div><!--/span-->
+        <div class="span8">
+        	<div class="well">
+        		<form class="form-inline">
+        			<textarea placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140"></textarea>
+        			<button class="btn-primary btn-large">Tweet</button>
+        		</form>
+        	</div>
+          <div class="well">
+          	<h1>Tweets</h1>
+          	<hr>
+          	<div>
+          		<!-- Tweet -->
+          		<div class="anti-well-nopadding-opaque border-box well-small columns" >
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+			  		<div style="display: block;">
+						<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+						<div style="margin-left: 90px; display: block;">
+							 <h5 style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger expected expected bigger expected expectedbigger expected expectedbigger expected expected than expected expected</h5>
+							 <em style="display: block; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+						</div>
+					</div>
+			  		<!-- <p>&nbsp;</p> -->
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+			  		</div>
+					 </blockquote>
+				 </div>
+				 
+				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
+			  		<div style="display: block;">
+						<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+						 <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+						 <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					</div>
+			  		<!-- <p>&nbsp;</p> -->
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+					 </blockquote>
+			  		</div>
+				 </div>
+				 
+				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
+			  		<div style="display: block;">
+						<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+						 <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+						 <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					</div>
+			  		<!-- <p>&nbsp;</p> -->
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+					 </blockquote>
+			  		</div>
+				 </div>
+				 
+				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
+			  		<div style="display: block;">
+						<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+						 <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+						 <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					</div>
+			  		<!-- <p>&nbsp;</p> -->
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+					 </blockquote>
+			  		</div>
+				 </div>
+				 
+				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
+			  		<div style="display: block;">
+						<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+						 <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+						 <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					</div>
+			  		<!-- <p>&nbsp;</p> -->
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+					 </blockquote>
+			  		</div>
+				 </div>
+				 
+				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
+			  		<div style="display: block;">
+						<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+						 <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+						 <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					</div>
+			  		<!-- <p>&nbsp;</p> -->
+			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+					 </blockquote>
+			  		</div>
+				 </div>
+          	
+          	</div>
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>© João Antunes 2012</p> <a href="#"><p class="pull-right">Feedback</p></a>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./home_fluid_from_sample_files/jquery.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-transition.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-alert.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-modal.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-dropdown.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-scrollspy.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-tab.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-tooltip.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-popover.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-button.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-collapse.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-carousel.js"></script>
+    <script src="./home_fluid_from_sample_files/bootstrap-typeahead.js"></script>
+
+  
+
+</body></html>
