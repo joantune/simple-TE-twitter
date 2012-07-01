@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import twitter.simplified.clone.domain.Tweet;
 import twitter.simplified.clone.domain.User;
 import twitter.simplified.clone.domain.UserDataOnDemand;
 import twitter.simplified.clone.domain.service.UserDetailsAndAuthenticationService.OwnUserDetailImplementation;
@@ -61,6 +62,7 @@ public class HomeController {
 		uiModel.addAttribute("numberFollowers", user.getNumberFollowers());
 		uiModel.addAttribute("numberOwnTweets", user.getNumberOwnTweets());
 		uiModel.addAttribute("listUsers", User.toJsonArrayWithoutDetails((User.findAllUsers())));
+		uiModel.addAttribute("listTweets", Tweet.toJsonArray(Tweet.findAllTweets()));
 //		if (!request.isUserInRole("ROLE_ADMIN"))
 //		{
 //			 throw new AccessDeniedException("denied");

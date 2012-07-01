@@ -36,10 +36,6 @@ privileged aspect Tweet_Roo_Json {
         return new JSONDeserializer<Tweet>().use(null, Tweet.class).deserialize(json);
     }
     
-    public static String Tweet.toJsonArray(Collection<Tweet> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
-    }
-    
     public static Collection<Tweet> Tweet.fromJsonArrayToTweets(String json) {
         return new JSONDeserializer<List<Tweet>>().use(null, ArrayList.class).use("values", Tweet.class).deserialize(json);
     }

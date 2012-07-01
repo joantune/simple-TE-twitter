@@ -27,6 +27,7 @@
   <spring:url value="/resources/js/underscore.js" var="underscore_js_url"  scope="request"/> 
   <spring:url value="/resources/js/backbone.js" var="backbone_js_url"  scope="request"/> 
   <spring:url value="/resources/js/home_backbone.js" var="home_backbone_js_url"  scope="request"/> 
+  <spring:url value="/resources/js/backbone-relational.js" var="backbone_relational_js_url"  scope="request"/> 
   
   <!-- Bootstrap -->
   <spring:url value="/resources/js/bootstrap-alert.js" var="bootstrap-alert_js_url"  scope="request"/> 

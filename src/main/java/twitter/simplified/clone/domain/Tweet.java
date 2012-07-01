@@ -16,7 +16,10 @@
  ******************************************************************************/
 package twitter.simplified.clone.domain;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +30,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import flexjson.JSONSerializer;
 
 @RooJavaBean
 @RooToString
@@ -45,4 +50,9 @@ public class Tweet {
     @NotNull
     @ManyToOne
     private User ownerUser;
+
+    public static String toJsonArray(Collection<Tweet> collection) {
+        return new JSONSerializer().exclude("*.class","version").serialize(collection);
+    }
+
 }

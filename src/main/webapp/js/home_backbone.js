@@ -18,9 +18,10 @@ var User;
 var FriendListCollection;
 var SearchResult;
 var UserSearchResultView;
+var Friends;
 $(function () {
 
-	User = Backbone.Model.extend( {
+	User = Backbone.RelationalModel.extend( {
 		initialize: function () {
 			if (!this.get("id") || !this.get("username") || !this.get("fullName") || !this.get("icon")) {
 				//TODO error
@@ -62,7 +63,7 @@ $(function () {
 		
 	});
 	
-	var Tweet = Backbone.Model.extend( {
+	var Tweet = Backbone.RelationalModel.extend( {
 		initialize: function() {
 			console.log("new tweet");
 		},
@@ -76,12 +77,21 @@ $(function () {
 				console.log("Error: tweet must have id, content, cretion_date, and owner_user");
 				return "Error: tweet must have id, content, cretion_date, and owner_user";
 				}
-		}
+		},
 		
+		relations: [{
+			type: Backbone.HasOne,
+			key: 'user',
+			relatedModel: 'User',
+			reverseRelation: {
+				key: 'tweets',
+				includeInJSON: 'id'
+			},
+		}]
 	
 	});
 	
-	var TweetCollection = Backbone.Model.extend({
+	var TweetCollection = Backbone.Collection.extend({
 		model:Tweet,
 		
 	});
@@ -97,9 +107,9 @@ $(function () {
 		}
 	});
 	
-	var Tweets = new Tweet;
+	var Tweets = new TweetCollection;
 	
-	var Friends = new FriendListCollection;
+	Friends = new FriendListCollection;
 	
 	SearchResult = new UserSearchResultCollection;
 	
@@ -163,25 +173,35 @@ $(function () {
 		el: $("#main"),
 		
 		events: {
-			"submit .navbar-search": "searchOnSubmit"
+			"submit .navbar-search": "searchOnSubmit",
+			"submit #newTweetForm": "newTweetOnSubmit"
 		},
 		
 		initialize: function() {
 			
 			this.friendListEl = this.$('#friend-list');
 			this.searchInput = this.$('#searchInput');
+			this.tweetListEl = this.$('#tweetList');
 			
 			Friends.bind('add', this.addFriend, this);
 			SearchResult.bind('add', this.addSearchResult,this);
 			SearchResult.bind('reset', this.addAllSearchResults,this);
 			
+			Tweets.bind('add', this.addTweet, this);
+			
 			Friends.add(friendList); 
+			Tweets.add(tweetInitialList);
 			
 		},
 		
 		addFriend: function(friend) {
 			var view = new FriendView({model: friend});
 			this.friendListEl.append(view.render().el);
+		},
+		
+		addTweet: function(tweet) {
+			var view = new TweetView({model: tweet});
+			this.tweetListEl.append(view.render().el);
 		},
 		
 		addSearchResult: function(searchResult) {
@@ -192,6 +212,10 @@ $(function () {
 		
 		addAllSearchResults: function() {
 			SearchResult.each(this.addSearchResult);
+		},
+		
+		newTweetOnSubmit: function(event) {
+			
 		},
 		
 		searchOnSubmit: function(e) {

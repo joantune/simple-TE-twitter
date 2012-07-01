@@ -245,108 +245,27 @@ div .friend em {
 						<c:if test="${numberFollowed != 0}">
 						
 						</c:if>
-				          	<div class="border-box well-small columns" style="height: 20px; overflow: auto; display: block; text-overflow: ellipsis;">
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
-					          <h4 style="display: inline-block; margin-left: 5%;">Full name bigger than expected</h4>
-					          <em>(username)</em>
-					         </div>
-					         	<div class="border-box well-small columns" style="height: 25px; overflow: hidden;  display: block; text-overflow: ellipsis;">
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
-					          <h5 style="display: inline-block; margin-left: 5%;">Full expected</h5>
-					          <em style="margin-left: 5%;">(username)</em>
-					         </div>
-					         	<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
-					          <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
-					          <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
-					          </div>
-					         	<div class="well-small friend" >
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
-					          <h5 style="">Full name bigger than expected expected</h5>
-					          <em style="">(usernameAlsoVeryBigIndeed)</em>
-					          </div>
-					          	<div class="well-small friend" >
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
-					          <h5 style="">Full name bigger than expected expected</h5>
-					          <em style="">(usernameAlsoVeryBigIndeed)</em>
-					          </div>
-					          	<div class="well-small friend" >
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <h5 style="">Full name bigger than expected expected</h5>
-					          <em style="">(usernameAlsoVeryBigIndeed)</em>
-					          </div>
-					          	<div class="well-small friend" >
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <h5 style="">Full name bigger than expected expected</h5>
-					          <em style="">(usernameAlsoVeryBigIndeed)</em>
-					          </div>
-					          	<div class="well-small friend" >
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <h5 style="">Full name bigger than expected expected</h5>
-					          <em style="">(usernameAlsoVeryBigIndeed)</em>
-					          </div>
-					          	<div class="well-small friend" >
-					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-					          <h5 style="">Full name bigger than expected expected</h5>
-					          <em style="">(usernameAlsoVeryBigIndeed)</em>
-					          </div>
 						</div>
 	          	</div>
 	      </div>
         </div><!--/span-->
         
-        <!-- 
+        <!-- Tweets -->
         <div class="span8">
         	<div class="well">
-        		<form class="form-inline">
-        			<textarea placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140" cols="2" rows="3"/>
+        		<form id="newTweetForm" class="form-inline">
+        			<textarea placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140" />
         			<button class="btn-primary btn-large">Tweet</button>
         		</form>
         	</div>
           <div class="well">
           	<h1>Tweets</h1>
        		<hr/>
-          	<div>
+          	<div id="tweetList">
           	
-          		<div class="anti-well-nopadding-opaque border-box well-small columns" >
-					 <blockquote style="overflow: auto; margin-bottom: 9px;">
-			  		<div style="display: block;">
-						<img class="avatar span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-						<div style="margin-left: 90px; display: block;">
-							 <h5 style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger expected expected bigger expected expectedbigger expected expectedbigger expected expected than expected expected</h5>
-							 <em style="display: block; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
-						</div>
-					</div>
-					
-			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
-					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
-			  		</div>
-					 </blockquote>
-				 </div>
-				 
-				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
-			  		<div style="display: block;">
-						<img class="avatar span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-						 <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
-						 <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
-					</div>
-					
-			  		<div style="display: block; margin-top: 9px; padding-top: 9px; margin-left: 20px;">
-					 <blockquote style="overflow: auto; margin-bottom: 9px;">
-					 		<p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
-					 </blockquote>
-			  		</div>
-				 </div>
-				 
-          	
-          	</div>
+          	</div><!-- div tweetList -->
           </div>
-        </div> -->
+        </div> 
         
       </div><!--/row-->
 
@@ -388,6 +307,7 @@ div .friend em {
 <script type="text/javascript">
 var defaultUserLogoUrl = "${defaultUserLogoUrl}";
 var friendList = ${listUsers};
+var tweetInitialList = ${listTweets};
 </script>
 
 <script src="${jquery_js_url}" type="text/javascript" ><!-- bug correcter --></script>
@@ -400,6 +320,7 @@ var friendList = ${listUsers};
 <script src="${underscore_js_url}" type="text/javascript"><!-- bug correcter --></script>
 <script src="${backbone_js_url}" type="text/javascript"><!-- bug correcter --></script>
 <script src="${home_backbone_js_url}" type="text/javascript"><!-- bug correcter --></script>
+<script src="${backbone_relational_js_url}" type="text/javascript"><!-- bug correcter --></script>
 
 <script src="${blockui_js_url}" type="text/javascript"><!-- bug correcter --></script>
 
@@ -432,12 +353,11 @@ var friendList = ${listUsers};
 <div class="anti-well-nopadding-opaque border-box well-small columns" >
 	<blockquote style="overflow: auto; margin-bottom: 9px;">
 		<div style="display: block;">
-			<img src="<%=icon%>" alt="<%-fullName%>" class="sizeFriendList span1"/>
-			<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+			<img class="avatar span1" src="<%=user.icon%>" alt="<%-user.fullName%>"/>
 		</div>
   		<div style="display: block; margin-left: 60px;">
-	 		<p style="padding-left: 20px;">Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
-	 		<small>someuser</small>
+	 		<p style="padding-left: 20px;"><%-content%></p>
+	 		<small><%-user.username%> @ <%-creation_date%></small>
   		</div>
 	</blockquote>
 </div> 
