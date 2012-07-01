@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+Copyright (C) 2012 João Antunes
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+ -->
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 <jsp:directive.page import="org.springframework.web.util.HtmlUtils"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
@@ -128,6 +144,11 @@
 	  		<button class="btn">2</button>
 	  		<button class="btn">3</button>
 		</div>
+		
+		<![CDATA[
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">simple-twitter-clone</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/joantune/simple-TE-twitter" property="cc:attributionName" rel="cc:attributionURL">João Antunes</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-Uso Não-Comercial-Partilha nos termos da mesma licença 3.0 Unported License</a>.<br />Permissions beyond the scope of this license may be available at <a xmlns:cc="http://creativecommons.org/ns#" href="http://web.ist.utl.pt/joao.a.p.antunes/contact.html" rel="cc:morePermissions">http://web.ist.utl.pt/joao.a.p.antunes/contact.html</a>.
+         ]]>
+		
 	</div>
 <!--  Loading JS in the end so that pages load faster-->
 <script src="${jquery_js_url}" type="text/javascript" ><!-- bug correcter --></script>

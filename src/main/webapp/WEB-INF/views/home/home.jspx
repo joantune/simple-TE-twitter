@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<!-- 
+Copyright (C) 2012 João Antunes
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+ -->
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    <!-- <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" />  -->
     <div class="navbar navbar-fixed-top">
      <div class="navbar-inner">
 					<div class="container-fluid">
@@ -17,10 +34,11 @@
 						<ul class="nav pull-right">
 							<li>
 								<!--  Search --> <!-- TODO action and typeahead/ajax maybe ? -->
-								<form class="navbar-search form-inline" action="">
-									<input type="text" class="search-query span2"
+								<form class="navbar-search form-inline" > 
+									<input autocomplete="off" id="searchInput" type="text" class="search-query span2"
 										placeholder="Search users" /> 
-								</form>
+										 <i class="icon-search icon-white"><!-- nothing here, damn 'bug' (?) !! --></i>
+								 </form>
 							</li>
 							<li class="divider-vertical"></li>
 							<li>
@@ -177,8 +195,11 @@ div .friend em {
 }
 </style>
 
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" />
 	<spring:url value="/resources/images/defaultUserLogo.png" var="defaultUserLogoUrl"/>
+	
+	<div id="connectionError" class="alert alert-error" style="display: none;">
+			Connection <strong>error.</strong> Please try again later. <a class="close" data-dismiss="alert" href="#">x</a>
+	</div>
 	
 	<div class="container-fluid">
       <div class="row nav">
@@ -186,8 +207,8 @@ div .friend em {
           <div class="well-small-opaque row">
           	<div>
 	          <img class="size32 span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
-	          <h4 class="span2">--</h4>
-	          <em class="span2">--</em>
+	          <h4 class="span2">${fn:escapeXml(user.fullName)}</h4>
+	          <em class="span2">${fn:escapeXml(user.username)}</em>
 	         </div>
           </div><!--/.well row -->
           <div class="row">
@@ -205,16 +226,77 @@ div .friend em {
 			  	</thead>
 			  	<tbody>
 			  		<tr>
-				  		<!-- <td>${user.numberOwnTweets}</td>
-				  		<td>${user.numberFollowed}</td>
-				  		<td>${user.numberFollowers}</td> -->
-				  		<td>123</td>
-				  		<td>2332</td>
-				  		<td>1222</td>
+				  		<td>${numberFollowed}</td>
+				  		<td>${numberFollowers}</td>
+				  		<td>${numberOwnTweets}</td>
 				  	</tr>
 			  	</tbody>
 			  </table>
 			  <p>&#xA0;&#xA0;&#xA0;&#xA0;</p>
+			  	<div class="well-nopadding-opaque">
+					<p class="nav-header" >Following</p>	          	
+					<hr/>
+						<div id="friend-list" style="display: block; overflow: auto; height: 200px;">
+						<c:if test="${numberFollowed == 0}">
+							<em>- you're currently not following anybody -</em>						
+							<p>suggestions disabled, please search for users on the search bar</p>
+						
+						</c:if>
+						<c:if test="${numberFollowed != 0}">
+						
+						</c:if>
+				          	<div class="border-box well-small columns" style="height: 20px; overflow: auto; display: block; text-overflow: ellipsis;">
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h4 style="display: inline-block; margin-left: 5%;">Full name bigger than expected</h4>
+					          <em>(username)</em>
+					         </div>
+					         	<div class="border-box well-small columns" style="height: 25px; overflow: hidden;  display: block; text-overflow: ellipsis;">
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h5 style="display: inline-block; margin-left: 5%;">Full expected</h5>
+					          <em style="margin-left: 5%;">(username)</em>
+					         </div>
+					         	<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected</h5>
+					          <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					         	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+					          <h5 style="">Full name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+						</div>
+	          	</div>
 	      </div>
         </div><!--/span-->
         
@@ -272,14 +354,96 @@ div .friend em {
 
       <footer>
         <p>© João Antunes 2012</p> <a href="#"><p class="pull-right">Feedback</p></a>
+        <spring:url value="/home/secured/search" var="search_secured"/>
+        <spring:url value="/users/search" var="search"/>
+		<a id="usersJson" class="writeJsonLink" href="${search }"> Users search </a>
+		<a id="homeJson" class="writeJsonLink" href="${search_secured}"> Home secured search </a>
+		
+		<div>
+			${listUsers}
+		</div>
+		<![CDATA[
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">simple-twitter-clone</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/joantune/simple-TE-twitter" property="cc:attributionName" rel="cc:attributionURL">João Antunes</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-Uso Não-Comercial-Partilha nos termos da mesma licença 3.0 Unported License</a>.<br />Permissions beyond the scope of this license may be available at <a xmlns:cc="http://creativecommons.org/ns#" href="http://web.ist.utl.pt/joao.a.p.antunes/contact.html" rel="cc:morePermissions">http://web.ist.utl.pt/joao.a.p.antunes/contact.html</a>.
+         ]]>
       </footer>
 
     </div><!--/.fluid-container-->
+    
+	<div class="modal fade hide" id="searchResultsModal">
+		<div class="modal-header">
+  			<button type="button" class="close" data-dismiss="modal">×</button>
+    		<h3>Search results</h3>
+		</div>
+		<div class="modal-body">
+			<div id="userSearchResult">
+			</div>
+  			<p>One fine body…</p>
+		</div>
+		<div class="modal-footer">
+		   <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+		</div>
+	</div>    
+    
 <!--  Loading JS in the end so that pages load faster-->
+<script type="text/javascript">
+var defaultUserLogoUrl = "${defaultUserLogoUrl}";
+var friendList = ${listUsers};
+</script>
+
 <script src="${jquery_js_url}" type="text/javascript" ><!-- bug correcter --></script>
 <script src="${less_js_url}" type="text/javascript" ><!-- bug correcter --></script>
 <script src="${bootstrap_js_url}" type="text/javascript" ><!-- damn --></script> 
 <script src="${jquery_uf_validator_js_url}" type="text/javascript" ><!-- damn --></script> 
+
+<script src="${mvcutil_js_url}" type="text/javascript"><!-- bug correcter --></script>
+
+<script src="${underscore_js_url}" type="text/javascript"><!-- bug correcter --></script>
+<script src="${backbone_js_url}" type="text/javascript"><!-- bug correcter --></script>
+<script src="${home_backbone_js_url}" type="text/javascript"><!-- bug correcter --></script>
+
+<script src="${blockui_js_url}" type="text/javascript"><!-- bug correcter --></script>
+
+ <!-- Templates -->
+
+<script type="text/template" id="friend-template">
+ <![CDATA[
+    <div class="well-small friend">
+		<img src="<%=icon%>" alt="<%-fullName%>" class="sizeFriendList span1"/>
+		<a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+		<h5><%-fullName%></h5>
+		<em>(<%-username%>)</em>
+	</div>
+ ]]>
+</script>
+
+<script type="text/template" id="user-search-result-template">
+ <![CDATA[
+<div class="well-small-opaque border-box well-small columns" style="height: 35px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+	<img src="<%=icon%>" alt="<%-fullName%>" class="sizeFriendList span1"/>
+	<a title="Follow <%-username%>" href="#" class="follow pull-right">  Follow <i class="icon-plus"><!--  --></i></a>
+	<h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;"><%-fullName%></h5>
+	<em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(<%-username%>)</em>
+</div>
+ ]]>
+</script>
+
+<script type="text/template" id="tweet-template">
+ <![CDATA[
+<div class="anti-well-nopadding-opaque border-box well-small columns" >
+	<blockquote style="overflow: auto; margin-bottom: 9px;">
+		<div style="display: block;">
+			<img src="<%=icon%>" alt="<%-fullName%>" class="sizeFriendList span1"/>
+			<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+		</div>
+  		<div style="display: block; margin-left: 60px;">
+	 		<p style="padding-left: 20px;">Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+	 		<small>someuser</small>
+  		</div>
+	</blockquote>
+</div> 
+ ]]>
+</script>
+
 
 </div>
 

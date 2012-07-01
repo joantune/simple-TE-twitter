@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <!-- Templates -->
+
+  <script type="text/template" id="friend-template">
+    <div class="well-small friend">
+		<img class="sizeFriendsList span1" src="<%=icon%>" alt="<%-fullName%>">
+		<a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+		<h5><%-fullName%></h5>
+		<em><%-username%></em>
+	</div>
+  </script>
+
+  <script type="text/template" id="stats-template">
+    <% if (done) { %>
+      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+    <% } %>
+    <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+  </script>

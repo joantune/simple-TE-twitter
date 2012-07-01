@@ -63,3 +63,10 @@ finder add --finderName findUsersByUsernameEquals --class ~.domain.User
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-24 19:11:40
 field string --class ~.domain.User --fieldName randomSalt --sizeMax 32 --sizeMin 32 --notNull
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-25 02:58:14
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-29 04:32:34
+json add --class ~.domain.User
+json add --class ~.domain.Tweet
+help
+help web mvc json setup
+web mvc json all 
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-29 04:50:35

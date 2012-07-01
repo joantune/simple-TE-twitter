@@ -1,4 +1,20 @@
 <!DOCTYPE html>
+<!--  
+# Copyright (C) 2012 João Antunes
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>
+-->
 <!-- saved from url=(0055)http://twitter.github.com/bootstrap/examples/fluid.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -242,7 +258,25 @@ div .friend em {
 					          </div>
 					         	<div class="well-small friend" >
 					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
-					          <h5 style="">Full name bigger than expected expected</h5>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h5 style="">Bull name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          <div>
+					         		<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h5 style="">Bull name bigger than expected expected</h5>
+					          <em style="">(usernameAlsoVeryBigIndeed)</em>
+					          </div>
+					          
+					          </div>
+					         
+					          
+					         	<div class="well-small friend" >
+					          <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+					          <a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+					          <h5 style="">Bull name bigger than expected expected</h5>
 					          <em style="">(usernameAlsoVeryBigIndeed)</em>
 					          </div>
 					          	<div class="well-small friend" >
@@ -301,6 +335,45 @@ div .friend em {
 			  		</div>
 					 </blockquote>
 				 </div>
+				 
+				 <!-- Tweet -->
+          		<div class="anti-well-nopadding-opaque border-box well-small columns" >
+					 <blockquote style="overflow: auto; margin-bottom: 9px;">
+			  		<div style="display: block;">
+						<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+						<!-- <div style="margin-left: 90px; display: block;">
+							 <h5 style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger expected expected bigger expected expectedbigger expected expectedbigger expected expected than expected expected</h5>
+							 <em style="display: block; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+						</div> -->
+					</div>
+			  		<!-- <p>&nbsp;</p> -->
+			  		<div style="display: block; margin-left: 60px;">
+					 		<p style="padding-left: 20px;">Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+					 		<small>someuser</small>
+			  		</div>
+					 </blockquote>
+				 </div>
+				 
+				 <!-- Tweet -->
+				 <div>
+					<div class="anti-well-nopadding-opaque border-box well-small columns" >
+						 <blockquote style="overflow: auto; margin-bottom: 9px;">
+				  		<div style="display: block;">
+							<img class="avatar span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+							<!-- <div style="margin-left: 90px; display: block;">
+								 <h5 style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger expected expected bigger expected expectedbigger expected expectedbigger expected expected than expected expected</h5>
+								 <em style="display: block; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+							</div> -->
+						</div>
+				  		<!-- <p>&nbsp;</p> -->
+				  		<div style="display: block; margin-left: 60px;">
+						 		<p style="padding-left: 20px;">Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive there</p>
+						 		<small>someuser</small>
+				  		</div>
+						 </blockquote>
+					 </div> 
+				 </div>
+          		
 				 
 				 <div class="anti-well-nopadding-opaque border-box well-small columns" >
 			  		<div style="display: block;">
@@ -376,6 +449,95 @@ div .friend em {
           </div><!--/row-->
         </div><!--/span-->
       </div><!--/row-->
+      
+	<div class="modal fade hide" id="myModal">
+		<div class="modal-header">
+  			<button type="button" class="close" data-dismiss="modal">×</button>
+    		<h3>Users found</h3>
+		</div>
+		<div class="modal-body">
+			<div class="user-search-result">
+				<div class="well-small-opaque border-box well-small columns" style="height: 35px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				     <a title="Follow the user" href="#" class="follow pull-right">  Follow <i class="icon-plus"><!--  --></i></a>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="well-small-opaque border-box well-small columns" style="height: 35px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				     <a title="Follow the user" href="#" class="follow pull-right">  Follow <i class="icon-plus"><!--  --></i></a>
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+				<div class="border-box well-small columns" style="height: 25px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+				    <img class="sizeFriendList span1" src="img/defaultUserLogo.png" alt="João Antunes"/>
+				    <h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">Full name bigger than expected expected expected expectedexpected expected </h5>
+				    <em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(usernameAlsoVeryBigIndeed)</em>
+				 </div>
+			
+			</div>
+  			<p>One fine body…</p>
+		</div>
+		<div class="modal-footer">
+		   <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	<a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a>
 
       <hr>
 

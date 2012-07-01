@@ -19,14 +19,29 @@
 
 package twitter.simplified.clone.domain;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import twitter.simplified.clone.domain.Tweet;
 
-privileged aspect Tweet_Roo_ToString {
+privileged aspect Tweet_Roo_Json {
     
-    public String Tweet.toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    public String Tweet.toJson() {
+        return new JSONSerializer().exclude("*.class").serialize(this);
+    }
+    
+    public static Tweet Tweet.fromJsonToTweet(String json) {
+        return new JSONDeserializer<Tweet>().use(null, Tweet.class).deserialize(json);
+    }
+    
+    public static String Tweet.toJsonArray(Collection<Tweet> collection) {
+        return new JSONSerializer().exclude("*.class").serialize(collection);
+    }
+    
+    public static Collection<Tweet> Tweet.fromJsonArrayToTweets(String json) {
+        return new JSONDeserializer<List<Tweet>>().use(null, ArrayList.class).use("values", Tweet.class).deserialize(json);
     }
     
 }
