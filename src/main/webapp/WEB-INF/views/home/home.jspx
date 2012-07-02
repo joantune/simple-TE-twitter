@@ -254,7 +254,7 @@ div .friend em {
         <div class="span8">
         	<div class="well">
         		<form id="newTweetForm" class="form-inline">
-        			<textarea placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140" />
+        			<textarea placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140"><!-- XML 'bug' --></textarea>
         			<button class="btn-primary btn-large">Tweet</button>
         		</form>
         	</div>
@@ -268,40 +268,45 @@ div .friend em {
         </div> 
         
       </div><!--/row-->
-
-      <hr/>
-
-      <footer>
-        <p>© João Antunes 2012</p> <a href="#"><p class="pull-right">Feedback</p></a>
-        <spring:url value="/home/secured/search" var="search_secured"/>
-        <spring:url value="/users/search" var="search"/>
-		<a id="usersJson" class="writeJsonLink" href="${search }"> Users search </a>
-		<a id="homeJson" class="writeJsonLink" href="${search_secured}"> Home secured search </a>
-		
-		<div>
-			${listUsers}
-		</div>
-		<![CDATA[
-		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">simple-twitter-clone</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/joantune/simple-TE-twitter" property="cc:attributionName" rel="cc:attributionURL">João Antunes</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-Uso Não-Comercial-Partilha nos termos da mesma licença 3.0 Unported License</a>.<br />Permissions beyond the scope of this license may be available at <a xmlns:cc="http://creativecommons.org/ns#" href="http://web.ist.utl.pt/joao.a.p.antunes/contact.html" rel="cc:morePermissions">http://web.ist.utl.pt/joao.a.p.antunes/contact.html</a>.
-         ]]>
-      </footer>
-
-    </div><!--/.fluid-container-->
-    
-	<div class="modal fade hide" id="searchResultsModal">
-		<div class="modal-header">
-  			<button type="button" class="close" data-dismiss="modal">×</button>
-    		<h3>Search results</h3>
-		</div>
-		<div class="modal-body">
-			<div id="userSearchResult">
+      
+      <div class="modal fade hide" id="searchResultsModal">
+			<div class="modal-header">
+	  			<button type="button" class="close" data-dismiss="modal">×</button>
+	    		<h3>Search results</h3>
 			</div>
-  			<p>One fine body…</p>
-		</div>
-		<div class="modal-footer">
-		   <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
-		</div>
-	</div>    
+			<div class="modal-body">
+				<div id="userSearchResult">
+				<!-- Something here not to break the XML -->
+				</div>
+	  			<p>One fine body…</p>
+			</div>
+			<div class="modal-footer">
+			   <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+			</div>
+		</div>    
+
+	
+	      
+      
+      
+    </div><!--/.fluid-container-->
+	      <hr/>
+    <footer>
+	        <p>© João Antunes 2012</p> <a href="#"><p class="pull-right">Feedback</p></a>
+	        <spring:url value="/home/secured/search" var="search_secured"/>
+	        <spring:url value="/users/search" var="search"/>
+			<a id="usersJson" class="writeJsonLink" href="${search }"> Users search </a>
+			<a id="homeJson" class="writeJsonLink" href="${search_secured}"> Home secured search </a>
+			
+			<div>
+				${listUsers}
+			</div>
+			<![CDATA[
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">simple-twitter-clone</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/joantune/simple-TE-twitter" property="cc:attributionName" rel="cc:attributionURL">João Antunes</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-Uso Não-Comercial-Partilha nos termos da mesma licença 3.0 Unported License</a>.<br />Permissions beyond the scope of this license may be available at <a xmlns:cc="http://creativecommons.org/ns#" href="http://web.ist.utl.pt/joao.a.p.antunes/contact.html" rel="cc:morePermissions">http://web.ist.utl.pt/joao.a.p.antunes/contact.html</a>.
+	         ]]>
+	      </footer>
+    
+	
     
 <!--  Loading JS in the end so that pages load faster-->
 <script type="text/javascript">
