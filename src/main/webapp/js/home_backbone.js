@@ -19,6 +19,9 @@ var FriendListCollection;
 var SearchResult;
 var UserSearchResultView;
 var Friends;
+var Tweets;
+var userResultViews = [];
+var tweetViews = [];
 $(function () {
 
 	User = Backbone.RelationalModel.extend( {
@@ -68,11 +71,11 @@ $(function () {
 			console.log("new tweet");
 		},
 		
-		validate: function(attrs) {
-			if (attrs.id ===undefined ||
+		validate:function(attrs) {
+			if (!this.isNew() &&(attrs.id ===undefined ||
 					!_.isString(attrs.content) ||
-					attrs.creation_date ===undefined ||
-					attrs.owner_user === undefined)
+					attrs.creationDate ===undefined ||
+					attrs.ownerUser === undefined))
 				{
 				console.log("Error: tweet must have id, content, cretion_date, and owner_user");
 				return "Error: tweet must have id, content, cretion_date, and owner_user";
@@ -81,18 +84,44 @@ $(function () {
 		
 		relations: [{
 			type: Backbone.HasOne,
-			key: 'user',
+			key: 'ownerUser',
 			relatedModel: 'User',
 			reverseRelation: {
 				key: 'tweets',
 				includeInJSON: 'id'
 			},
-		}]
+		}],
+		
+		parse: function(parsable) {
+			console.log('it is detecting the parsing, that is good');
+			return parsable;
+		},
+		
+		url: function() {
+			return 'newTweet';
+		}
 	
 	});
 	
 	var TweetCollection = Backbone.Collection.extend({
 		model:Tweet,
+		
+		comparator: function(tweetA, tweetB) {
+			 if (tweetA.get('creationDate') === tweetB.get('creationDate'))
+				 //in the 'weird' case, let's use ID
+				 {
+				   if (tweetA.get('id') > tweetB.get('id')) return -1;
+				   if (tweetA.get('id') < tweetB.get('id')) return 1;
+				   if (tweetA.get('id') === tweetB.get('id')) 
+					   {
+					   console.log("Strange, tweets with same ID added!!");
+					   return 0;
+					   }
+				   
+				 }
+			 if (tweetA.get('creationDate') > tweetB.get('creationDate')) return -1;
+			 if (tweetA.get('creationDate') < tweetB.get('creationDate')) return 1;
+		}
 		
 	});
 	
@@ -107,7 +136,7 @@ $(function () {
 		}
 	});
 	
-	var Tweets = new TweetCollection;
+	Tweets = new TweetCollection;
 	
 	Friends = new FriendListCollection;
 	
@@ -139,7 +168,12 @@ $(function () {
 	});
 	
 	var TweetView = Backbone.View.extend({
-		template: _.template($('#tweet-template').html())
+		template: _.template($('#tweet-template').html()),
+		
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		}
 	});
 	
 	
@@ -174,7 +208,9 @@ $(function () {
 		
 		events: {
 			"submit .navbar-search": "searchOnSubmit",
-			"submit #newTweetForm": "newTweetOnSubmit"
+			"click #newTweetButton": "addOwnTweet",
+			"keypress #newTweetTA" : "addOwnTweetOnEnter"
+				
 		},
 		
 		initialize: function() {
@@ -182,11 +218,13 @@ $(function () {
 			this.friendListEl = this.$('#friend-list');
 			this.searchInput = this.$('#searchInput');
 			this.tweetListEl = this.$('#tweetList');
+			this.newTweetInput = this.$('#newTweetTA');
 			
 			Friends.bind('add', this.addFriend, this);
 			SearchResult.bind('add', this.addSearchResult,this);
 			SearchResult.bind('reset', this.addAllSearchResults,this);
 			
+			Tweets.bind('reset', this.resetTweets,this);
 			Tweets.bind('add', this.addTweet, this);
 			
 			Friends.add(friendList); 
@@ -202,20 +240,47 @@ $(function () {
 		addTweet: function(tweet) {
 			var view = new TweetView({model: tweet});
 			this.tweetListEl.append(view.render().el);
+			tweetViews.push(view);
+			Tweets.sort();
 		},
 		
+		addTweetSkipSort: function(tweet) {
+			var view = new TweetView({model: tweet});
+			this.tweetListEl.append(view.render().el);
+			tweetViews.push(view);
+		},
+		
+		resetTweets: function() {
+			//let's remove all of them
+			deleteAllViews(tweetViews);
+			//, and add all of them
+			Tweets.each(this.addTweetSkipSort,this);
+			
+		},
+		
+		
+		addOwnTweetOnEnter: function(e)
+		{
+			if (e.keyCode != 13) return;
+			if (!this.newTweetInput.val()) return;
+			this.addOwnTweet();
+		},
 		addSearchResult: function(searchResult) {
 			$('#searchResultsModal').modal();
 			var searchView = new UserSearchResultView({model: searchResult});
 			$('#userSearchResult').append(searchView.render().el);
+			userResultViews.push(searchView);
 		},
 		
 		addAllSearchResults: function() {
+			deleteAllViews(userResultViews);
 			SearchResult.each(this.addSearchResult);
 		},
 		
-		newTweetOnSubmit: function(event) {
-			
+		addOwnTweet: function(event) {
+			Tweets.create({content: this.newTweetInput.val()},{wait: true});
+			this.newTweetInput.val('');
+			Tweets.sort();
 		},
 		
 		searchOnSubmit: function(e) {
@@ -247,6 +312,11 @@ $(function () {
 		}
 		
 	});
+	
+	function deleteAllViews(arrayOfViews) {
+		arrayOfViews.forEach(function(viewElement){viewElement.remove();});
+		arrayOfViews = [];
+	}
 	
 	
 	var App = new AppView;

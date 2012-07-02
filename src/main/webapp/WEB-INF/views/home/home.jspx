@@ -253,10 +253,8 @@ div .friend em {
         <!-- Tweets -->
         <div class="span8">
         	<div class="well">
-        		<form id="newTweetForm" class="form-inline">
-        			<textarea placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140"><!-- XML 'bug' --></textarea>
-        			<button class="btn-primary btn-large">Tweet</button>
-        		</form>
+        			<textarea id="newTweetTA" placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140"><!-- XML 'bug' --></textarea>
+        			<button id="newTweetButton" class="btn-primary btn-large">Tweet</button>
         	</div>
           <div class="well">
           	<h1>Tweets</h1>
@@ -358,11 +356,11 @@ var tweetInitialList = ${listTweets};
 <div class="anti-well-nopadding-opaque border-box well-small columns" >
 	<blockquote style="overflow: auto; margin-bottom: 9px;">
 		<div style="display: block;">
-			<img class="avatar span1" src="<%=user.icon%>" alt="<%-user.fullName%>"/>
+			<img class="avatar span1" src="<%=ownerUser.icon%>" alt="<%-ownerUser.fullName%>"/>
 		</div>
   		<div style="display: block; margin-left: 60px;">
 	 		<p style="padding-left: 20px;"><%-content%></p>
-	 		<small><%-user.username%> @ <%-creation_date%></small>
+	 		<small><%-ownerUser.username%> @ <%-creationDate%></small>
   		</div>
 	</blockquote>
 </div> 

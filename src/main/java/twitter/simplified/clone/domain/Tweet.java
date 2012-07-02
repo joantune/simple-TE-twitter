@@ -30,7 +30,9 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.security.core.context.SecurityContextHolder;
 
+import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
 @RooJavaBean
@@ -39,20 +41,38 @@ import flexjson.JSONSerializer;
 @RooJson
 public class Tweet {
 
-    @NotNull
-    @Size(min = 5, max = 140)
-    private String content;
+	@NotNull
+	@Size(min = 5, max = 140)
+	private String content;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date creationDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "M-")
+	private Date creationDate;
 
-    @NotNull
-    @ManyToOne
-    private User ownerUser;
+	@NotNull
+	@ManyToOne
+	private User ownerUser;
 
-    public static String toJsonArray(Collection<Tweet> collection) {
-        return new JSONSerializer().exclude("*.class","version").serialize(collection);
-    }
+	public static String toJsonArray(Collection<Tweet> collection) {
+		return new JSONSerializer().exclude("*.class", "version").serialize(
+				collection);
+	}
+
+	public static Tweet fromJsonContentToTweet(String json, User owner) {
+		Tweet tweet = new JSONDeserializer<Tweet>().use(null, Tweet.class)
+				.deserialize(json);
+		tweet.setCreationDate(new Date());
+		tweet.setOwnerUser(owner);
+		return tweet;
+	}
+
+	public String toJson() {
+		return new JSONSerializer().exclude("*.class",
+				"ownerUser.emailAddress", 
+				"ownerUser.numberFollowed", "ownerUser.numberFollowers",
+				"ownerUser.numberOwnTweets", "ownerUser.password",
+				"ownerUser.randomSalt", "ownerUser.tempPasswordContainer",
+				 "ownerUser.version").serialize(this);
+	}
 
 }
