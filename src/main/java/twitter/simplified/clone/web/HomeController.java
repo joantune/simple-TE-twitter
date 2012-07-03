@@ -64,7 +64,7 @@ public class HomeController {
 		uiModel.addAttribute("numberFollowed", user.getNumberFollowed());
 		uiModel.addAttribute("numberFollowers", user.getNumberFollowers());
 		uiModel.addAttribute("numberOwnTweets", user.getNumberOwnTweets());
-		uiModel.addAttribute("listUsers", User.toJsonArrayWithoutDetails((User.findAllUsers())));
+		uiModel.addAttribute("listFriends", User.toJsonArrayWithoutDetails(user.getFollowed()));
 		uiModel.addAttribute("listTweets", Tweet.toJsonArray(Tweet.findAllTweets()));
 //		if (!request.isUserInRole("ROLE_ADMIN"))
 //		{
@@ -74,15 +74,17 @@ public class HomeController {
 	}
 	
 	 @RequestMapping(value="secured/search/{searchString}", method=RequestMethod.GET, produces="application/json")
-	 public @ResponseBody ResponseEntity<String> searchUser(@PathVariable("searchString") String searchString) {
+	 public @ResponseBody ResponseEntity<String> searchUser(@PathVariable("searchString") String searchString, Principal principal) {
+		 User ownerUser = User.findUsersByUsernameEquals(principal.getName()).getSingleResult();
     	 HttpHeaders headers = new HttpHeaders();
          headers.add("Content-Type", "application/json; charset=utf-8");
 		 List<User> users = User.findUsersByUsernameLikeOrEmailAddressLikeOrFullNameLike(searchString, searchString, searchString).getResultList();
+		 users.remove(ownerUser);
 		 return  new ResponseEntity<String>(User.toJsonArrayWithoutDetails(users),headers,HttpStatus.OK);
 		 
 	 }
 	 
-	 @RequestMapping(value="secured/newTweet", method=RequestMethod.POST, produces="application/json")
+	 @RequestMapping(value="secured/Tweets", method=RequestMethod.POST, produces="application/json")
 	 public @ResponseBody ResponseEntity<String> newTweet(@RequestBody String jsonTweet, Principal principal, HttpServletRequest request) {
 		 User ownerUser = User.findUsersByUsernameEquals(principal.getName()).getSingleResult();
 		 Tweet tweet = Tweet.fromJsonContentToTweet(jsonTweet, ownerUser);
@@ -90,6 +92,30 @@ public class HomeController {
     	 HttpHeaders headers = new HttpHeaders();
          headers.add("Content-Type", "application/json; charset=utf-8");
 		 return  new ResponseEntity<String>(tweet.toJson() ,headers,HttpStatus.CREATED);
+		 
+	 }
+	 
+	 @RequestMapping(value="secured/Friends/{id}", method=RequestMethod.PUT, produces="application/json")
+	 public @ResponseBody ResponseEntity<String> follow(@RequestBody String jsonFriendDetails, @PathVariable("id") Long befollowingUserId , Principal principal, HttpServletRequest request) {
+		 User ownerUser = User.findUsersByUsernameEquals(principal.getName()).getSingleResult();
+		 User userToBeFriended = User.findUser(befollowingUserId);
+		 User materializedUser = User.fromJsonToUser(jsonFriendDetails);
+		 HttpStatus response=null;
+		 if (userToBeFriended.equals(ownerUser))
+			 response = HttpStatus.BAD_REQUEST;
+//		 if (!materializedUser.getFullName().equals(userToBeFriended.getFullName()) || 
+//				 !materializedUser.getEmailAddress().equals(userToBeFriended.getEmailAddress()) ||
+//				 !materializedUser.getUsername().equals((userToBeFriended.getUsername())))
+//			 response = HttpStatus.CONFLICT;
+		 if (response == null) {
+			 response = HttpStatus.NO_CONTENT;
+			 ownerUser.getFollowed().add(userToBeFriended);
+			 ownerUser.flush();
+		 }
+		 
+    	 HttpHeaders headers = new HttpHeaders();
+         headers.add("Content-Type", "application/json; charset=utf-8");
+		 return  new ResponseEntity<String>(headers,response);
 		 
 	 }
 	

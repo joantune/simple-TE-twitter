@@ -26,6 +26,9 @@ import java.util.Set;
 import javax.persistence.Access;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NoResultException;
 import javax.persistence.Transient;
@@ -84,9 +87,11 @@ public class User implements UserDetailsService {
     private Set<Tweet> ownedTweets = new HashSet<Tweet>();
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="user_follows", joinColumns=@JoinColumn(name="followedId"), inverseJoinColumns=@JoinColumn(name="followerId"))
     private Set<twitter.simplified.clone.domain.User> followers = new HashSet<twitter.simplified.clone.domain.User>();
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="user_follows", joinColumns=@JoinColumn(name="followerId") , inverseJoinColumns=@JoinColumn(name="followedId"))
     private Set<twitter.simplified.clone.domain.User> followed = new HashSet<twitter.simplified.clone.domain.User>();
 
     @NotNull

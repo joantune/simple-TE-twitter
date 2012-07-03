@@ -22,6 +22,7 @@ var Friends;
 var Tweets;
 var userResultViews = [];
 var tweetViews = [];
+var friendViews = [];
 $(function () {
 
 	User = Backbone.RelationalModel.extend( {
@@ -98,7 +99,7 @@ $(function () {
 		},
 		
 		url: function() {
-			return 'newTweet';
+			return 'Tweets';
 		}
 	
 	});
@@ -125,15 +126,38 @@ $(function () {
 		
 	});
 	
+	function stringInsensitiveComparator(stringA, stringB) {
+		if (stringA === null && stringB != null) return -1;
+		if (stringA != null && stringB === null) return 1;
+		if (stringA === null && stringB === null) return 0;
+		if (!_.isString(stringA) || !_.isString(stringB))
+			throw Error('no strings were parsed');
+		return stringA.toLowerCase().localeCompare(stringB.toLowerCase());
+	}
+	
+	function fullNameInsensitiveComparator(userA, userB) {
+		return stringInsensitiveComparator(userA.get('fullName'), userB.get('fullName'));
+	}
+	
 	FriendListCollection = Backbone.Collection.extend({
-		model: User
+		model: User,
+		
+		comparator: fullNameInsensitiveComparator,
+		
+		url: function() {
+			return "Friends";
+		}
+		
 	});
 	
 	UserSearchResultCollection = Backbone.Collection.extend({
 		model: User,
 		url: function() {
 			return "search/" + $('#searchInput').val();
-		}
+		},
+		
+		comparator: fullNameInsensitiveComparator
+	
 	});
 	
 	Tweets = new TweetCollection;
@@ -151,7 +175,8 @@ $(function () {
 		},
 	
 		follow: function() {
-			this.model.follow();			
+			SearchResult.remove(this.model);
+			Friends.create(this.model,{wait:true});
 		},
 		
 		initialize: function() {
@@ -233,8 +258,13 @@ $(function () {
 		},
 		
 		addFriend: function(friend) {
-			var view = new FriendView({model: friend});
-			this.friendListEl.append(view.render().el);
+			if (!friend.isNew())
+				{
+				var view = new FriendView({model: friend});
+				this.friendListEl.append(view.render().el);
+				friendViews.push(view);
+				Friends.sort();
+				}
 		},
 		
 		addTweet: function(tweet) {

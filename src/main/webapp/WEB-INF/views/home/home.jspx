@@ -226,9 +226,9 @@ div .friend em {
 			  	</thead>
 			  	<tbody>
 			  		<tr>
+				  		<td>${numberOwnTweets}</td>
 				  		<td>${numberFollowed}</td>
 				  		<td>${numberFollowers}</td>
-				  		<td>${numberOwnTweets}</td>
 				  	</tr>
 			  	</tbody>
 			  </table>
@@ -309,7 +309,7 @@ div .friend em {
 <!--  Loading JS in the end so that pages load faster-->
 <script type="text/javascript">
 var defaultUserLogoUrl = "${defaultUserLogoUrl}";
-var friendList = ${listUsers};
+var friendList = ${listFriends};
 var tweetInitialList = ${listTweets};
 </script>
 
