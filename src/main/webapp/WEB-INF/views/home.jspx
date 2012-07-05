@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+Copyright (C) 2012 João Antunes
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+ -->
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <!-- <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" />  -->
+    <div class="navbar navbar-fixed-top">
+     <div class="navbar-inner">
+					<div class="container-fluid">
+						<span class="brand">Simple Twitter</span>
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="#">Home</a>
+								</li>
+							</ul>
+						</div>
+
+						<ul class="nav pull-right">
+							<li>
+								<!--  Search --> <!-- TODO action and typeahead/ajax maybe ? -->
+								<form class="navbar-search form-inline" > 
+									<input autocomplete="off" id="searchInput" type="text" class="search-query span2"
+										placeholder="Search users" /> 
+										 <i class="icon-search icon-white"><!-- nothing here, damn 'bug' (?) !! --></i>
+								 </form>
+							</li>
+							<li class="divider-vertical"></li>
+							<li>
+								 <spring:url value="/resources/j_spring_security_logout" var="logout"/>
+								<a href="${logout}"><spring:message code="security_logout"/></a>
+							</li>
+							<!--  here maybe a user profile/etc
+							<li class="dropdown">
+				              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+				              <ul class="dropdown-menu">
+				                <li><a href="#">Action</a></li>
+				                <li><a href="#">Another action</a></li>
+				                <li><a href="#">Something else here</a></li>
+				                <li class="divider"></li>
+				                <li><a href="#">Separated link</a></li>
+				              </ul>
+				            </li> -->
+						</ul>
+					</div>
+	 </div>
+    </div>
+
+<style type="text/css">
+   /* Special grid styles
+-------------------------------------------------- */
+.show-grid {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.show-grid [class*="span"] {
+  background-color: #eee;
+  text-align: center;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  min-height: 30px;
+  line-height: 30px;
+}
+.show-grid:hover [class*="span"] {
+  background: #ddd;
+}
+.show-grid .show-grid {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.show-grid .show-grid [class*="span"] {
+  background-color: #ccc;
+}
+
+.size32 {
+	width: 32px;
+	height: 32px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.size16 {
+	width: 16px;
+	height: 16px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+  body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      } 
+
+.sizeFriendList {
+	width: 24px;
+	height: 24px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.well-small {
+	padding: 9px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.well-small-opaque {
+	padding: 9px;
+	background-color: #f5f5f5;
+	border: 1px solid #eee;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	/* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+.well-nopadding-opaque {
+	background-color: #f5f5f5;
+	border: 1px solid #eee;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	/* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+.anti-well-nopadding-opaque {
+  background-color: white;
+  border: 1px solid #333333;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+   /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+}
+
+div .friend {
+	height: 25px;
+	width: 100%;
+	overflow: hidden;
+	display: block;
+	text-overflow: ellipsis;
+}
+
+div .friend h5 {
+	margin-left: 5%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+div .friend em {
+	display: block;
+	margin-left: 5%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.avatar {
+	width: 48px;
+	height: 48px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+</style>
+
+	<spring:url value="/resources/images/defaultUserLogo.png" var="defaultUserLogoUrl"/>
+	
+	<div id="connectionError" class="alert alert-error" style="display: none;">
+			Connection <strong>error.</strong> Please try again later. <a class="close" data-dismiss="alert" href="#">x</a>
+	</div>
+	
+	<div class="container-fluid">
+      <div class="row nav">
+   	   <div class="offset1 span3 columns">
+          <div class="well-small-opaque row">
+          	<div>
+	          <img class="size32 span1" src="${defaultUserLogoUrl}" alt="João Antunes"/>
+	          <h4 class="span2">${fn:escapeXml(user.fullName)}</h4>
+	          <em class="span2">${fn:escapeXml(user.username)}</em>
+	         </div>
+          </div><!--/.well row -->
+          <div class="row">
+			  <p class="nav-header">Statistics</p>
+			  <table class="table table-bordered table-striped table-condensed">
+			  	<thead>
+			  		<!-- <tr>
+			  			<th>Statistics</th>
+			  		</tr> -->
+			  		<tr>
+			  			<th>Tweets</th>
+			  			<th>Following</th>
+			  			<!-- <th>Followers</th>  -->
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+			  		<tr>
+				  		<td id="nrTweets">${numberOwnTweets}</td>
+				  		<td id="nrFollowing">${numberFollowed}</td>
+				  	<!-- <td id="nrFollowers">${numberFollowers}</td> -->
+				  	</tr>
+			  	</tbody>
+			  </table>
+			  <p>&#xA0;&#xA0;&#xA0;&#xA0;</p>
+			  	<div class="well-nopadding-opaque">
+					<p class="nav-header" >Following</p>	          	
+					<hr/>
+						<div id="friend-list" style="display: block; overflow: auto; height: 200px;">
+							<div id="noFollowersDiv">
+								<em>- you're currently not following anybody -</em>						
+								<p>&#xA0;&#xA0;&#xA0;&#xA0;</p>
+								<p>suggestions disabled, please search for users on the search bar</p>
+							</div>
+						</div>
+	          	</div>
+	      </div>
+        </div><!--/span-->
+        
+        <!-- Tweets -->
+        <div class="span8">
+        	<div class="well">
+        			<textarea id="newTweetTA" placeholder="Compose new Tweet..." class="span6 input-xlarge" maxlength="140"><!-- XML 'bug' --></textarea>
+        			<button id="newTweetButton" class="btn-primary btn-large">Tweet</button>
+        	</div>
+          <div class="well">
+          	<h1>Tweets</h1>
+       		<hr/>
+          	<div id="tweetList">
+				<div id="noTweetsDiv">
+					<em>- you currently have no tweets -</em>						
+          		</div>
+          	</div><!-- div tweetList -->
+          </div>
+        </div> 
+        
+      </div><!--/row-->
+      
+      <div class="modal fade hide" id="searchResultsModal">
+			<div class="modal-header">
+	  			<button type="button" class="close" data-dismiss="modal">×</button>
+	    		<h3>Search results</h3>
+			</div>
+			<div class="modal-body">
+				<div id="userSearchResult">
+				<!-- Something here not to break the XML -->
+				</div>
+			</div>
+			<div class="modal-footer">
+			   <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+			</div>
+		</div>    
+
+	
+	      
+      
+      
+    </div><!--/.fluid-container-->
+	      <hr/>
+    <footer>
+	        <p>© João Antunes 2012</p> <a href="#"><p class="pull-right">Feedback</p></a>
+	        <spring:url value="/home/secured/search" var="search_secured"/>
+	        <spring:url value="/users/search" var="search"/>
+			<a id="usersJson" class="writeJsonLink" href="${search }"> Users search </a>
+			<a id="homeJson" class="writeJsonLink" href="${search_secured}"> Home secured search </a>
+			
+			<div>
+				${listUsers}
+			</div>
+			<![CDATA[
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">simple-twitter-clone</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/joantune/simple-TE-twitter" property="cc:attributionName" rel="cc:attributionURL">João Antunes</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-Uso Não-Comercial-Partilha nos termos da mesma licença 3.0 Unported License</a>.<br />Permissions beyond the scope of this license may be available at <a xmlns:cc="http://creativecommons.org/ns#" href="http://web.ist.utl.pt/joao.a.p.antunes/contact.html" rel="cc:morePermissions">http://web.ist.utl.pt/joao.a.p.antunes/contact.html</a>.
+	         ]]>
+	      </footer>
+    
+	
+    
+<!--  Loading JS in the end so that pages load faster-->
+<script type="text/javascript">
+var defaultUserLogoUrl = "${defaultUserLogoUrl}";
+var friendList = ${listFriends};
+var tweetInitialList = ${listTweets};
+</script>
+
+<script src="${jquery_js_url}" type="text/javascript" ><!-- bug correcter --></script>
+<script src="${less_js_url}" type="text/javascript" ><!-- bug correcter --></script>
+<script src="${bootstrap_js_url}" type="text/javascript" ><!-- damn --></script> 
+<script src="${jquery_uf_validator_js_url}" type="text/javascript" ><!-- damn --></script> 
+
+<script src="${mvcutil_js_url}" type="text/javascript"><!-- bug correcter --></script>
+
+<script src="${underscore_js_url}" type="text/javascript"><!-- bug correcter --></script>
+<script src="${backbone_js_url}" type="text/javascript"><!-- bug correcter --></script>
+<script src="${home_backbone_js_url}" type="text/javascript"><!-- bug correcter --></script>
+<script src="${backbone_relational_js_url}" type="text/javascript"><!-- bug correcter --></script>
+
+<script src="${blockui_js_url}" type="text/javascript"><!-- bug correcter --></script>
+
+ <!-- Templates -->
+
+<script type="text/template" id="friend-template">
+ <![CDATA[
+    <div class="well-small friend">
+		<img src="<%=icon%>" alt="<%-fullName%>" class="sizeFriendList span1"/>
+		<a title="Unfollow the user" href="#" class="unfollow pull-left"><i class="icon-remove"><!--  --></i></a>
+		<h5><%-fullName%></h5>
+		<em>(<%-username%>)</em>
+	</div>
+ ]]>
+</script>
+
+<script type="text/template" id="user-search-result-template">
+ <![CDATA[
+<div class="well-small-opaque border-box well-small columns" style="height: 35px; width: 100%; overflow: hidden;  display: block; text-overflow: ellipsis;">
+	<img src="<%=icon%>" alt="<%-fullName%>" class="sizeFriendList span1"/>
+	<a title="Follow <%-username%>" href="#" class="follow pull-right">  Follow <i class="icon-plus"><!--  --></i></a>
+	<h5 style="margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;"><%-fullName%></h5>
+	<em style="display: block; margin-left: 5%; overflow:hidden; text-overflow: ellipsis; white-space:nowrap;">(<%-username%>)</em>
+</div>
+ ]]>
+</script>
+
+<script type="text/template" id="tweet-template">
+ <![CDATA[
+<div class="anti-well-nopadding-opaque border-box well-small columns" >
+	<blockquote style="overflow: auto; margin-bottom: 9px;">
+		<div style="display: block;">
+			<img class="avatar span1" src="<%=ownerUser.icon%>" alt="<%-ownerUser.fullName%>"/>
+		</div>
+  		<div style="display: block; margin-left: 60px;">
+	 		<p style="padding-left: 20px;"><%-content%></p>
+	 		<small><strong><%-ownerUser.username%></strong> @ <%-new Date(creationDate).toLocaleString()%></small>
+  		</div>
+	</blockquote>
+</div> 
+ ]]>
+</script>
+
+
+</div>
+
+

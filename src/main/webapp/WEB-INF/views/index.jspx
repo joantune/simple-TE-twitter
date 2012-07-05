@@ -1,14 +1,217 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-  <jsp:directive.page contentType="text/html;charset=UTF-8" />
-  <jsp:output omit-xml-declaration="yes" />
-  <spring:message var="app_name" code="application_name" htmlEscape="false" />
-  <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
-    <h3>
-      <spring:message code="welcome_h3" arguments="${app_name}" />
-    </h3>
-    <p>
-      <spring:message code="welcome_text" />
-    </p>
-  </util:panel>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+Copyright (C) 2012 João Antunes
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+ -->
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<jsp:directive.page import="org.springframework.web.util.HtmlUtils"/>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <div class="navbar-inner">
+    	<div class="navbar navbar-fixed-top">
+    		<div class="container-fluid">
+    			<p><!--  --></p>
+    		</div>
+    	</div>
+    </div>
+    
+    
+  <style type="text/css">
+    	 .centered {
+   	 		display: block;
+  		 	margin-left: auto;
+  		 	margin-right: auto;
+    	 }
+  </style>
+  
+  <!--  Please login conditional info -->
+  <c:if test="${not empty param.pleaseLogin}">
+	  <div class="navbar-fixed-bottom container-fluid">
+		<div id="registerFirst" class="alert alert-info">
+			<button class="close" data-dismiss="alert">×</button>
+			  <!--  let's retrieve the full name, if it exists -->
+			  <c:if test="${not empty param.fullName}">
+				<h3 style="font-weight: normal; text-align: center;"><strong> ${fn:escapeXml(param.fullName)}</strong>, please login before proceeding</h3>
+			  </c:if>
+			  <c:if test="${empty param.fullName}">
+				<h3 style="font-weight: normal; text-align: center;"><strong>Please</strong> login or register before proceeding</h3>
+			  </c:if>
+	  	</div>
+	  </div>
+  </c:if>
+ 
+ 	<div class="container">
+ 		<div class="hero-unit">
+					<video id="example_video_1" class="centered video-js vjs-default-skin" controls="" preload="Auto" width="640" height="264"
+				     	poster="http://video-js.zencoder.com/oceans-clip.png"
+					   	data-setup="{}">
+						<source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+					   	<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+					   	<source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+					   	<track kind="captions" src="captions.vtt" srclang="en" label="English" />
+					</video>
+ 		</div>
+ 		<div class="row centered well-transparent" style="padding-top: 0px;">
+	 			<div class="span5 well-transparent" style="padding-top: 0px;">
+	 				<h2>New user</h2>
+	 				<p>Register here</p>
+			  		
+			  		<c:if test="${not empty param.registerErrors}">
+			  			<c:set var="registerErrorsDisplay" value="" />
+			  		</c:if>
+			  		<c:if test="${empty param.registerErrors}">
+			  			<c:set var="registerErrorsDisplay" value="display: none;" />
+			  		</c:if>
+	 				
+	 				<div class="alert alert-error fade-in" id="registerErrorDiv"
+							style="${registerErrorsDisplay}">
+							<h4 class="alert-heading">Register error!</h4>
+					</div>
+					
+					<form:errors  path="username"/>
+					<form:errors  path="password"/>
+					<form:errors  path="emailAddress"/>
+					<form:errors  path="randomSalt"/>
+					<form:errors  path="fullName"/>
+	 				
+    				<spring:url value="/users" var="register_form_url" />
+	 				<form id="user" class="form-horizontal" method="POST" action="${fn:escapeXml(register_form_url)}">
+							<div class="control-group">
+								<input placeholder="Full Name" name="fullName" class="row-fluid req-string" type="text"/>
+								<input placeholder="Email" name="emailAddress" class="row-fluid req-email" type="text"/>
+								<input placeholder="Username" name="username" class="input req-min row-fluid" minlength="4" maxlength="16" type="text"/>
+								<input	placeholder="Password" name="tempPasswordContainer" class="input req-same row-fluid span3" rel="password" type="password"/>
+								<div class="row-fluid">
+									<input	placeholder="Repeat password" name="password_repeated" class=" input req-same" rel="password" type="password"/>
+									<button id="registerButton" class="btn pull-right" type="submit">Register!</button>
+								</div>
+							</div>
+					</form>
+	 			</div>
+	 			
+	 			<c:if test="${not empty param.login_error}">
+			  			<c:set var="loginErrorsDisplay" value="" />
+			  		</c:if>
+			  		<c:if test="${empty param.login_error}">
+			  			<c:set var="loginErrorsDisplay" value="display: none;" />
+			  	</c:if>
+	 			<div class="span5 well-transparent" style="padding-top: 0px;">
+	 				<h2>Login</h2>
+	 				<p>Login here</p>
+					
+					<!--  Error div -->	 				
+	 				<div id="loginErrorDiv" class="alert alert-error fade-in" style="${loginErrorsDisplay}">
+	 					<h4 class="alert-heading">Login error!</h4>
+	 					<c:if test="${not empty param.login_error}">
+	 					  <div id="afterSubmitError">
+	 					  	<p class="alert-error">Wrong credentials</p>
+					        <!-- let us not show the default error message - it has a security problem (shows when a user exists vs when a users password is wrong)
+					           <spring:message code="security_login_unsuccessful" />
+					          <p><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /></p> -->
+				          </div>
+	 					</c:if>
+	 				</div>
+	 				
+    				<spring:url value="/resources/j_spring_security_check" var="form_url" />
+	 				<form id="loginForm" name="f" class="form-inline" method="post" action="${fn:escapeXml(form_url)}" >
+						<div class="control-group">
+							<input id="j_username" name="j_username" type="text" class="req-string span2 input-small" placeholder="Username"/> 					
+							<input id="j_password" name="j_password" type="password"  class="req-string span2 input-small" placeholder="Password"/> 					
+							<button id="loginButton" type="submit" class="btn btn-primary">Login!</button>
+						</div>
+	 				</form>
+	 				<p>&#xA0;&#xA0;</p>
+	    			<p>&#xA0;&#xA0;</p>
+	 			</div>
+ 		</div>
+		
+		<footer>
+		<hr/>
+		<![CDATA[
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">simple-twitter-clone</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/joantune/simple-TE-twitter" property="cc:attributionName" rel="cc:attributionURL">João Antunes</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-Uso Não-Comercial-Partilha nos termos da mesma licença 3.0 Unported License</a>.<br />Permissions beyond the scope of this license may be available at <a xmlns:cc="http://creativecommons.org/ns#" href="http://web.ist.utl.pt/joao.a.p.antunes/contact.html" rel="cc:morePermissions">http://web.ist.utl.pt/joao.a.p.antunes/contact.html</a>.
+         ]]>
+		
+		</footer>
+		
+	</div>
+<!--  Loading JS in the end so that pages load faster-->
+<script src="${jquery_js_url}" type="text/javascript" ><!-- bug correcter --></script>
+<script src="${less_js_url}" type="text/javascript" ><!-- bug correcter --></script>
+<script src="${video_js_url}" type="text/javascript" ><!-- damn --></script>
+<script src="${bootstrap_js_url}" type="text/javascript" ><!-- damn --></script> 
+<script src="${jquery_uf_validator_js_url}" type="text/javascript" ><!-- damn --></script> 
+
+<script type="text/javascript">
+		// EXECUTE PLUGIN ON DOM READY - START
+		$(function () {
+			
+			$('#loginButton').formValidator({
+				/*
+				onSuccess	: function() { 
+					console.log('Success!'); 
+					$('#loginForm .control-group').removeClass('error')
+				},
+				*/
+				scope		: '#loginForm',
+				errorDiv	: '#loginErrorDiv',
+				onError		: function () { 
+								$('#afterSubmitError').hide();
+								//let's make the inputs have an error class
+								$('#loginForm .control-group').addClass('error')
+					},
+				errorMsg	: {
+							reqString	: 'You need to fill out both fields'
+							}
+			
+			});
+					// by default let's hide the login error div, unless we have an afterSubmitError
+			/* 	if (!$('#afterSubmitError').is())
+					{
+					$('#loginErrorDiv').hide();
+					} */
+					
+				$('#registerButton').formValidator({
+					/*
+					onSuccess	: function() { 
+						console.log('Success!'); 
+						$('#loginForm .control-group').removeClass('error')
+					},
+					*/
+					scope		: '#user',
+				/* 	onSuccess	: function () {
+						console.log("Register Success!!!");
+					}, */
+					onError		: function() {
+						$('#user .control-group').addClass('error');
+					},
+					errorDiv	: '#registerErrorDiv',
+					errorMsg	: {
+								reqString	: '<br/>You need to fill out all fields',
+								reqMailNotValid: '<br/>Please insert a valid email address',
+								reqMailEmpty: '<br/>You must insert an email address',
+								reqSame: '<br/>The password must be the same',
+								reqMin: '<br/>The username must be at least %1 characters long'
+								},
+					customErrMsg	: '<strong>Register form errors:</strong>'
+				
+				});
+			
+		});
+		// EXECUTE PLUGIN ON DOM READY - END
+	</script>
+
 </div>
+
+

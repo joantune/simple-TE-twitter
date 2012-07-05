@@ -41,14 +41,14 @@ import twitter.simplified.clone.domain.User;
 import twitter.simplified.clone.domain.service.UserDetailsAndAuthenticationService.OwnUserDetailImplementation;
 
 
-@RequestMapping("/home")
+@RequestMapping("/")
 @Controller
 public class HomeController {
 	
 	@RequestMapping(value="index", produces="text/html")
 	public String index()
 	{
-		return "home/index";
+		return "index";
 	}
 	@Transactional
 	@RequestMapping(value="secured/home", produces="text/html")
@@ -68,7 +68,7 @@ public class HomeController {
 //		{
 //			 throw new AccessDeniedException("denied");
 //		}
-		return "home/secured/home";
+		return "secured/home";
 	}
 	
 	 @RequestMapping(value="secured/search/{searchString}", method=RequestMethod.GET, produces="application/json")

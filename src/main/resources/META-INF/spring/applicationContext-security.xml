@@ -22,13 +22,13 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <!-- HTTP security configurations -->
     <http auto-config="true" use-expressions="true">
-        <form-login login-processing-url="/resources/j_spring_security_check" login-page="/home/index?pleaseLogin=t" authentication-failure-url="/home/index?login_error=t" default-target-url="/home/secured/home" />
+        <form-login login-processing-url="/resources/j_spring_security_check" login-page="/index?pleaseLogin=t" authentication-failure-url="/index?login_error=t" default-target-url="/secured/home" />
         <logout logout-url="/resources/j_spring_security_logout" />
         <!-- Configure these elements to secure URIs in your application -->
         <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/members/**" access="isAuthenticated()" />
         <intercept-url pattern="/tweets**" access="isAuthenticated()" />
-        <intercept-url pattern="/home/secured/**" access="isAuthenticated()" />
+        <intercept-url pattern="/secured/**" access="isAuthenticated()" />
         <intercept-url pattern="/**" access="permitAll" />
     </http>
     <!-- Configure Authentication mechanism -->

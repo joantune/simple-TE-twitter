@@ -47,20 +47,20 @@ public class UserController {
     public String create(@Valid User user, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, user);
-            return "redirect:/home/index?registerErrors=t";
+            return "redirect:/index?registerErrors=t";
         }
         uiModel.asMap().clear();
         try {
             user.persist();
         } catch (PersistenceException ex) {
-            return "redirect:/home/index?registerErrors=t";
+            return "redirect:/index?registerErrors=t";
         }
         try {
-            return "redirect:/home/index?pleaseLogin=t&fullName=" + UriUtils.encodePathSegment(user.getFullName(), WebUtils.DEFAULT_CHARACTER_ENCODING);
+            return "redirect:/index?pleaseLogin=t&fullName=" + UriUtils.encodePathSegment(user.getFullName(), WebUtils.DEFAULT_CHARACTER_ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return "redirect:/home/index?pleaseLogin=t";
+        return "redirect:/index?pleaseLogin=t";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
