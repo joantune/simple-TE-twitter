@@ -4,12 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_twitter_simplified_clone_domain_User" items="${users}" z="XyM4NJqAyGtsq/JA+U4IOPUhzGw=">
         <table:table data="${users}" id="l_twitter_simplified_clone_domain_User" path="/users" z="0z4vNDWoYdfIBsgKsTZfosSOb4c=">
-            <table:column id="c_twitter_simplified_clone_domain_User_username" property="username" z="aH3fLJqFwVfYNxNwPDtNS8BARhE="/>
-            <table:column id="c_twitter_simplified_clone_domain_User_emailAddress" property="emailAddress" z="Hg6OFt1Ntp992AUt2+VpjcQOdI8="/>
+            <table:column id="c_twitter_simplified_clone_domain_User_randomSalt" property="randomSalt" z="UJkJUb4fO1rEpGJCwubuRdLGB7I="/>
+            <table:column id="c_twitter_simplified_clone_domain_User_password" property="password" z="i+Be5VjdMX8dD3KuoRRd8Ds1SUw="/>
             <table:column id="c_twitter_simplified_clone_domain_User_fullName" property="fullName" z="7Qs+xzFNcEqkR+2RZV3nekWCjec="/>
-            <table:column id="c_twitter_simplified_clone_domain_User_ownedTweets" property="ownedTweets" z="tMt16NUtFkCEc6TVoJygOQfezjE="/>
-            <table:column id="c_twitter_simplified_clone_domain_User_followers" property="followers" z="1i9OYY/OOKWHIA/Kg8UqUqSYgrU="/>
-            <table:column id="c_twitter_simplified_clone_domain_User_followed" property="followed" z="BeDB4V6V15vRGR1rjGYdiz5nQM8="/>
         </table:table>
     </page:list>
 </div>

@@ -221,14 +221,14 @@ div .friend em {
 			  		<tr>
 			  			<th>Tweets</th>
 			  			<th>Following</th>
-			  			<th>Followers</th>
+			  			<!-- <th>Followers</th>  -->
 			  		</tr>
 			  	</thead>
 			  	<tbody>
 			  		<tr>
-				  		<td>${numberOwnTweets}</td>
-				  		<td>${numberFollowed}</td>
-				  		<td>${numberFollowers}</td>
+				  		<td id="nrTweets">${numberOwnTweets}</td>
+				  		<td id="nrFollowing">${numberFollowed}</td>
+				  	<!-- <td id="nrFollowers">${numberFollowers}</td> -->
 				  	</tr>
 			  	</tbody>
 			  </table>
@@ -237,14 +237,11 @@ div .friend em {
 					<p class="nav-header" >Following</p>	          	
 					<hr/>
 						<div id="friend-list" style="display: block; overflow: auto; height: 200px;">
-						<c:if test="${numberFollowed == 0}">
-							<em>- you're currently not following anybody -</em>						
-							<p>suggestions disabled, please search for users on the search bar</p>
-						
-						</c:if>
-						<c:if test="${numberFollowed != 0}">
-						
-						</c:if>
+							<div id="noFollowersDiv">
+								<em>- you're currently not following anybody -</em>						
+								<p>&#xA0;&#xA0;&#xA0;&#xA0;</p>
+								<p>suggestions disabled, please search for users on the search bar</p>
+							</div>
 						</div>
 	          	</div>
 	      </div>
@@ -260,7 +257,9 @@ div .friend em {
           	<h1>Tweets</h1>
        		<hr/>
           	<div id="tweetList">
-          	
+				<div id="noTweetsDiv">
+					<em>- you currently have no tweets -</em>						
+          		</div>
           	</div><!-- div tweetList -->
           </div>
         </div> 
@@ -276,7 +275,6 @@ div .friend em {
 				<div id="userSearchResult">
 				<!-- Something here not to break the XML -->
 				</div>
-	  			<p>One fine body…</p>
 			</div>
 			<div class="modal-footer">
 			   <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
@@ -360,7 +358,7 @@ var tweetInitialList = ${listTweets};
 		</div>
   		<div style="display: block; margin-left: 60px;">
 	 		<p style="padding-left: 20px;"><%-content%></p>
-	 		<small><%-ownerUser.username%> @ <%-creationDate%></small>
+	 		<small><strong><%-ownerUser.username%></strong> @ <%-new Date(creationDate).toLocaleString()%></small>
   		</div>
 	</blockquote>
 </div> 

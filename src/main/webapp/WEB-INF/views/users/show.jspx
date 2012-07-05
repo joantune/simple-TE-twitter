@@ -3,13 +3,10 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_twitter_simplified_clone_domain_User" object="${user}" path="/users" z="I7BjphdaNKIicVwknPZU1gPMOOE=">
+        <field:display field="randomSalt" id="s_twitter_simplified_clone_domain_User_randomSalt" object="${user}" z="ICJ16+w9yN7AvyTjmqdGNsvrfVQ="/>
+        <field:display field="password" id="s_twitter_simplified_clone_domain_User_password" object="${user}" z="662jQS2G7FwqEOQeSn/pYl4dU/c="/>
+        <field:display field="fullName" id="s_twitter_simplified_clone_domain_User_fullName" object="${user}" z="rXNKtAi35SbY7MdWUBiS2vlLANc="/>
         <field:display field="username" id="s_twitter_simplified_clone_domain_User_username" object="${user}" z="+ysJ4Vy1Zxg2jkFnFfekylhRqAg="/>
         <field:display field="emailAddress" id="s_twitter_simplified_clone_domain_User_emailAddress" object="${user}" z="jW2a9iZnU9jVkAvh4nauqgBH0v0="/>
-        <field:display field="fullName" id="s_twitter_simplified_clone_domain_User_fullName" object="${user}" z="rXNKtAi35SbY7MdWUBiS2vlLANc="/>
-        <field:display field="ownedTweets" id="s_twitter_simplified_clone_domain_User_ownedTweets" object="${user}" z="P7R9XPMMBc0fLCqwO0goPBFC9Kw="/>
-        <field:display field="followers" id="s_twitter_simplified_clone_domain_User_followers" object="${user}" z="zDfAL6Ih1zDMALnCLRejJXTjGYY="/>
-        <field:display field="followed" id="s_twitter_simplified_clone_domain_User_followed" object="${user}" z="LZH79e1Sysb2vKnwGXlB403AZvw="/>
-        <field:display field="password" id="s_twitter_simplified_clone_domain_User_password" object="${user}" z="662jQS2G7FwqEOQeSn/pYl4dU/c="/>
-        <field:display field="randomSalt" id="s_twitter_simplified_clone_domain_User_randomSalt" object="${user}" z="ICJ16+w9yN7AvyTjmqdGNsvrfVQ="/>
     </page:show>
 </div>

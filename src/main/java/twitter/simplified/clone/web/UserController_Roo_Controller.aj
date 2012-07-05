@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+import twitter.simplified.clone.domain.Follow;
 import twitter.simplified.clone.domain.Tweet;
 import twitter.simplified.clone.domain.User;
 import twitter.simplified.clone.web.UserController;
@@ -76,8 +77,8 @@ privileged aspect UserController_Roo_Controller {
     
     void UserController.populateEditForm(Model uiModel, User user) {
         uiModel.addAttribute("user", user);
+        uiModel.addAttribute("follows", Follow.findAllFollows());
         uiModel.addAttribute("tweets", Tweet.findAllTweets());
-        uiModel.addAttribute("users", User.findAllUsers());
     }
     
     String UserController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

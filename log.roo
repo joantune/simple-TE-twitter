@@ -76,3 +76,47 @@ poll now
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-02 13:44:11
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-02 23:52:58
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-02 23:57:27
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-03 13:57:14
+entity jpa --class ~.domain.Follow --testAutomatically
+field reference --type ~.domain.User --fieldName follower --cardinality ONE_TO_ONE --notNull
+field reference --type ~.domain.User --fieldName followed --cardinality ONE_TO_ONE --notNull
+field date --fieldName creationDate --type java.util.Date --persistenceType JPA_TIMESTAMP --notNull
+// [failed] entity jpa --class ~.domain.User
+entity jpa --class ~.domain.User --permitReservedWords 
+// [failed] field reference --type ~.domain.Tweet --fieldName ownedTweets --cardinality ONE_TO_MANY --class ~.domain.Tweet --referencedColumnName id
+// [failed] field reference --type ~.domain.Tweet --fieldName ownedTweets --cardinality MANY_TO_ONE --class ~.domain.Tweet --referencedColumnName id
+field reference --type ~.domain.User --fieldName ownerUser --cardinality ONE_TO_ONE --class ~.domain.User
+// [failed] field reference --type ~.domain.Follow --fieldName followed --cardinality ONE_TO_MANY --class ~.domain.Follow
+// [failed] field reference --type ~.domain.User --fieldName followed --cardinality ONE_TO_ONE --class ~.domain.Follow
+field reference --type ~.domain.User --fieldName followed --cardinality ONE_TO_ONE --class ~.domain.Follow
+field reference --type ~.domain.User --fieldName follower --cardinality ONE_TO_ONE --class ~.domain.User
+field reference --type ~.domain.User --fieldName follower --cardinality ONE_TO_ONE --class ~.domain.Follow
+// [failed] field reference --type ~.domain.Follow --fieldName followers --cardinality ONE_TO_MANY --class ~.domain.User
+// [failed] field reference --type ~.domain.Follow --fieldName followers --cardinality ONE_TO_MANY --class ~.domain.User
+// [failed] field reference --type ~.domain.Follow --fieldName followers --cardinality ONE_TO_MANY
+field set --type ~.domain.Follow --fieldName followers --cardinality ONE_TO_MANY --mappedBy followed
+field set --type ~.domain.Follow --fieldName follows --cardinality ONE_TO_MANY --mappedBy follower
+// [failed] field reference --type ~.domain.Tweet --fieldName ownedTweets --cardinality ONE_TO_MANY --class ~.domain.User --joinColumnName ownerUser
+field set --fieldName ownedTweets --type ~.domain.Tweet --cardinality ONE_TO_MANY --mappedBy ownerUser
+field reference --type ~.domain.User --fieldName ownerUser --class ~.domain.Tweet --cardinality MANY_TO_ONE --notNull 
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-03 14:45:44
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-03 21:41:13
+field string --class ~.domain.User --fieldName randomSalt --sizeMax 32 --sizeMin 32 --notNull
+field string --class ~.domain.User --fieldName password --notNull --sizeMax 64 --sizeMin 64
+field string --fieldName fullName --notNull --sizeMin 4 --sizeMax 100 --comment "reasonable maxsize of 100 chars"
+field string --fieldName username --notNull --sizeMin 4 --sizeMax 16 --unique
+finder add --finderName findUsersByUsernameLikeOrEmailAddressLikeOrFullNameLike
+field string --fieldName emailAddress --notNull --unique --sizeMin 4 --sizeMax 254
+finder add --finderName findUsersByUsernameLikeOrEmailAddressLikeOrFullNameLike
+finder add --finderName findUsersByUsernameEquals --class ~.domain.User
+json add --class ~.domain.User
+json add --class ~.domain.Tweet
+
+json add --class ~.domain.Tweet
+
+json add --class ~.domain.Tweet
+web mvc json add --jsonObject ~.domain.User
+web mvc json all
+test integration 
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-07-04 01:47:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-07-04 23:08:18

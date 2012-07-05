@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
     <div class="navbar-inner">
     	<div class="navbar navbar-fixed-top">
     		<div class="container-fluid">
-				<p>wazaaa</p>
+    			<p><!--  --></p>
     		</div>
     	</div>
     </div>
@@ -136,18 +136,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 	    			<p>&#xA0;&#xA0;</p>
 	 			</div>
  		</div>
-	<p>fuU234567</p>
-	
-	<p> this: <c:out value="${pageContext['request'].userPrincipal}"/> - </p>
-		 <div class="btn-group">
-	  		<button class="btn">1</button>
-	  		<button class="btn">2</button>
-	  		<button class="btn">3</button>
-		</div>
 		
+		<footer>
+		<hr/>
 		<![CDATA[
 		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">simple-twitter-clone</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/joantune/simple-TE-twitter" property="cc:attributionName" rel="cc:attributionURL">João Antunes</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-Uso Não-Comercial-Partilha nos termos da mesma licença 3.0 Unported License</a>.<br />Permissions beyond the scope of this license may be available at <a xmlns:cc="http://creativecommons.org/ns#" href="http://web.ist.utl.pt/joao.a.p.antunes/contact.html" rel="cc:morePermissions">http://web.ist.utl.pt/joao.a.p.antunes/contact.html</a>.
          ]]>
+		
+		</footer>
 		
 	</div>
 <!--  Loading JS in the end so that pages load faster-->

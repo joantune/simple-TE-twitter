@@ -4,10 +4,59 @@
 package twitter.simplified.clone.domain;
 
 import java.util.Set;
+import twitter.simplified.clone.domain.Follow;
 import twitter.simplified.clone.domain.Tweet;
 import twitter.simplified.clone.domain.User;
 
 privileged aspect User_Roo_JavaBean {
+    
+    public Set<Follow> User.getFollowers() {
+        return this.followers;
+    }
+    
+    public void User.setFollowers(Set<Follow> followers) {
+        this.followers = followers;
+    }
+    
+    public Set<Follow> User.getFollows() {
+        return this.follows;
+    }
+    
+    public void User.setFollows(Set<Follow> follows) {
+        this.follows = follows;
+    }
+    
+    public Set<Tweet> User.getOwnedTweets() {
+        return this.ownedTweets;
+    }
+    
+    public void User.setOwnedTweets(Set<Tweet> ownedTweets) {
+        this.ownedTweets = ownedTweets;
+    }
+    
+    public String User.getRandomSalt() {
+        return this.randomSalt;
+    }
+    
+    public void User.setRandomSalt(String randomSalt) {
+        this.randomSalt = randomSalt;
+    }
+    
+    public String User.getPassword() {
+        return this.password;
+    }
+    
+    public void User.setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String User.getFullName() {
+        return this.fullName;
+    }
+    
+    public void User.setFullName(String fullName) {
+        this.fullName = fullName;
+    }
     
     public String User.getUsername() {
         return this.username;
@@ -23,54 +72,6 @@ privileged aspect User_Roo_JavaBean {
     
     public void User.setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-    
-    public String User.getFullName() {
-        return this.fullName;
-    }
-    
-    public void User.setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-    
-    public Set<Tweet> User.getOwnedTweets() {
-        return this.ownedTweets;
-    }
-    
-    public void User.setOwnedTweets(Set<Tweet> ownedTweets) {
-        this.ownedTweets = ownedTweets;
-    }
-    
-    public Set<User> User.getFollowers() {
-        return this.followers;
-    }
-    
-    public void User.setFollowers(Set<User> followers) {
-        this.followers = followers;
-    }
-    
-    public Set<User> User.getFollowed() {
-        return this.followed;
-    }
-    
-    public void User.setFollowed(Set<User> followed) {
-        this.followed = followed;
-    }
-    
-    public String User.getPassword() {
-        return this.password;
-    }
-    
-    public void User.setPassword(String password) {
-        this.password = password;
-    }
-    
-    public String User.getRandomSalt() {
-        return this.randomSalt;
-    }
-    
-    public void User.setRandomSalt(String randomSalt) {
-        this.randomSalt = randomSalt;
     }
     
 }

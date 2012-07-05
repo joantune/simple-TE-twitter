@@ -7,12 +7,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import twitter.simplified.clone.domain.User;
-import twitter.simplified.clone.domain.UserDataOnDemand;
 import twitter.simplified.clone.domain.UserIntegrationTest;
 
 privileged aspect UserIntegrationTest_Roo_IntegrationTest {
@@ -22,9 +20,6 @@ privileged aspect UserIntegrationTest_Roo_IntegrationTest {
     declare @type: UserIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
     
     declare @type: UserIntegrationTest: @Transactional;
-    
-    @Autowired
-    private UserDataOnDemand UserIntegrationTest.dod;
     
     @Test
     public void UserIntegrationTest.testCountUsers() {

@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 var User;
+var tweetsSyncInterval;
 var FriendListCollection;
 var SearchResult;
 var UserSearchResultView;
@@ -54,8 +55,7 @@ $(function () {
 		},
 		
 		unfollow: function() {
-			//remote jquery unfollow task
-			//TODO
+			this.destroy({wait:true});
 			console.log("unfollow of user " + this.get("username"));
 		},
 		
@@ -70,6 +70,9 @@ $(function () {
 	var Tweet = Backbone.RelationalModel.extend( {
 		initialize: function() {
 			console.log("new tweet");
+		},
+		removalFollowed: function () {
+			console.log('Detected the removal of the followed person');
 		},
 		
 		validate:function(attrs) {
@@ -93,10 +96,10 @@ $(function () {
 			},
 		}],
 		
-		parse: function(parsable) {
-			console.log('it is detecting the parsing, that is good');
-			return parsable;
-		},
+//		parse: function(parsable) {
+//			console.log('it is detecting the parsing, that is good');
+//			return parsable;
+//		},
 		
 		url: function() {
 			return 'Tweets';
@@ -122,7 +125,9 @@ $(function () {
 				 }
 			 if (tweetA.get('creationDate') > tweetB.get('creationDate')) return -1;
 			 if (tweetA.get('creationDate') < tweetB.get('creationDate')) return 1;
-		}
+		},
+		
+		url: "Tweets"
 		
 	});
 	
@@ -144,9 +149,7 @@ $(function () {
 		
 		comparator: fullNameInsensitiveComparator,
 		
-		url: function() {
-			return "Friends";
-		}
+		url: "Friends"
 		
 	});
 	
@@ -166,6 +169,15 @@ $(function () {
 	
 	SearchResult = new UserSearchResultCollection;
 	
+//	var UserNullSearchResultView = Backbone.View.extend({
+//		template: _.template($('#user-search-result-noResult').html()),
+//		
+//		render: function() {
+//			this.$el.html(this.template());
+//		}
+//		
+//	});
+	
 	UserSearchResultView = Backbone.View.extend({
 		
 		template: _.template($('#user-search-result-template').html()),
@@ -177,6 +189,7 @@ $(function () {
 		follow: function() {
 			SearchResult.remove(this.model);
 			Friends.create(this.model,{wait:true});
+			this.remove();
 		},
 		
 		initialize: function() {
@@ -221,11 +234,11 @@ $(function () {
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
-		}
+		},
+		
 		
 		
 	});
-	$().alert();
 	
 	var AppView = Backbone.View.extend({
 		
@@ -246,6 +259,8 @@ $(function () {
 			this.newTweetInput = this.$('#newTweetTA');
 			
 			Friends.bind('add', this.addFriend, this);
+			Friends.bind('reset', this.resetFriends, this);
+			Friends.bind('remove', this.processFriendRelatedTweets, this);
 			SearchResult.bind('add', this.addSearchResult,this);
 			SearchResult.bind('reset', this.addAllSearchResults,this);
 			
@@ -256,6 +271,54 @@ $(function () {
 			Tweets.add(tweetInitialList);
 			
 		},
+		resetFriends : function() {
+			deleteAllViews(friendViews);
+			Friends.each(this.addFriendSkipSort,this);
+			//the skip sort thing is kinda messy, I'm sure I could find some other way to do it, don't care ATM :)
+		},
+		
+		processFriendRelatedTweets: function()
+		{
+			//ok, not using the relational power, let's just update the list of tweets
+			console.log("processing FriendRelatedTweets");
+			Tweets.fetch();
+		},
+		
+		//number listeners - Tweets, Following & Followers:
+		nrTweetsListener: function() {
+			if (Tweets.size() == 0)
+				{
+				$('#noTweetsDiv').show();
+				
+				}
+			else {
+				$('#noTweetsDiv').hide();
+			}
+			$('#nrTweets').html(Tweets.size());
+		},
+		nrFollowingListener: function() {
+			if (Friends.size() == 0)
+				{
+				$('#noFollowersDiv').show();
+				}
+			else {
+				$('#noFollowersDiv').hide();
+				
+			}
+			$('#nrFollowing').html(Friends.size());
+		},
+		
+		addFriendSkipSort: function(friend) {
+			if (!friend.isNew())
+				{
+				var view = new FriendView({model: friend});
+				this.friendListEl.append(view.render().el);
+				friendViews.push(view);
+//				Friends.sort();
+				}
+			this.nrFollowingListener();
+			this.processFriendRelatedTweets();
+		},
 		
 		addFriend: function(friend) {
 			if (!friend.isNew())
@@ -265,6 +328,8 @@ $(function () {
 				friendViews.push(view);
 				Friends.sort();
 				}
+			this.nrFollowingListener();
+			this.processFriendRelatedTweets();
 		},
 		
 		addTweet: function(tweet) {
@@ -272,6 +337,7 @@ $(function () {
 			this.tweetListEl.append(view.render().el);
 			tweetViews.push(view);
 			Tweets.sort();
+			this.nrTweetsListener();
 		},
 		
 		addTweetSkipSort: function(tweet) {
@@ -285,6 +351,7 @@ $(function () {
 			deleteAllViews(tweetViews);
 			//, and add all of them
 			Tweets.each(this.addTweetSkipSort,this);
+			this.nrTweetsListener();
 			
 		},
 		
@@ -296,14 +363,19 @@ $(function () {
 			this.addOwnTweet();
 		},
 		addSearchResult: function(searchResult) {
-			$('#searchResultsModal').modal();
 			var searchView = new UserSearchResultView({model: searchResult});
 			$('#userSearchResult').append(searchView.render().el);
 			userResultViews.push(searchView);
 		},
 		
-		addAllSearchResults: function() {
+		addAllSearchResults: function(results) {
 			deleteAllViews(userResultViews);
+			$('#searchResultsModal').modal();
+			if (_.isEmpty(results))
+				{
+				
+				}
+			console.log(JSON.stringify(results));
 			SearchResult.each(this.addSearchResult);
 		},
 		
@@ -350,5 +422,10 @@ $(function () {
 	
 	
 	var App = new AppView;
+	
+	tweetsSyncInterval = self.setInterval(function () {
+		Tweets.fetch();
+		Friends.fetch();
+	}, 10000);
 	
 });
