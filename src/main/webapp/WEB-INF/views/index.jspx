@@ -54,14 +54,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
  
  	<div class="container">
  		<div class="hero-unit">
-					<video id="example_video_1" class="centered video-js vjs-default-skin" controls="" preload="Auto" width="640" height="264"
-				     	poster="http://video-js.zencoder.com/oceans-clip.png"
+				<!-- 	<video id="example_video_1" class="centered video-js vjs-default-skin" controls="" preload="Auto" width="640" height="264"
 					   	data-setup="{}">
-						<source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
-					   	<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
-					   	<source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+					   	<spring:url value="/resources/videoplayback.flv" var="video_url"/>
+						<source src="${video_url}" type='video/vlc' />
+					   	<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' /> 
+					   	<source src="http://video-js.zencoder.com/tina.ogv" type='video/ogg' />
 					   	<track kind="captions" src="captions.vtt" srclang="en" label="English" />
-					</video>
+					</video> -->
+					<iframe class="centered" width="640" height="360" src="http://www.youtube.com/embed/Fh20pdCrCAU?rel=0&amp;autoplay=1" frameborder="0" ><!-- nothing here --></iframe>
  		</div>
  		<div class="row centered well-transparent" style="padding-top: 0px;">
 	 			<div class="span5 well-transparent" style="padding-top: 0px;">
