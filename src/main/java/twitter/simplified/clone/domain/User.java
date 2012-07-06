@@ -120,6 +120,8 @@ public class User implements UserDetailsService {
     @Transactional(readOnly=true)
     public Collection<Tweet> getTweetsForHomepage()
     {
+    	if (getFollows().isEmpty())
+    		return getOwnedTweets();
     	 EntityManager em = User.entityManager();
          TypedQuery<Tweet> q = em.createQuery("SELECT t FROM Tweet AS t, Follow AS f WHERE (t.ownerUser) = (:user) OR f.follower = (:user) AND (t.ownerUser) = (f.followed)", Tweet.class);
          q.setParameter("user", this);
